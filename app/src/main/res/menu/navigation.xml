@@ -4,17 +4,17 @@
 
     <item
         android:id="@+id/navigation_inventory"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/inventory"
         android:title="@string/title_inventory" />
 
     <item
         android:id="@+id/navigation_sold"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/sold"
         android:title="@string/title_sold" />
 
     <item
         android:id="@+id/navigation_shipped"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/shipped"
         android:title="@string/title_shipped" />
 
 </menu>

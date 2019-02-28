@@ -18,13 +18,10 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_inventory:
-                    mTextMessage.setText(R.string.title_inventory);
                     return true;
                 case R.id.navigation_sold:
-                    mTextMessage.setText(R.string.title_sold);
                     return true;
                 case R.id.navigation_shipped:
-                    mTextMessage.setText(R.string.title_shipped);
                     return true;
             }
             return false;
