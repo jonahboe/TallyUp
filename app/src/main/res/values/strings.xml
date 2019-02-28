@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">TallyUp</string>
     <string name="title_inventory">Inventory</string>
     <string name="title_sold">Sold</string>
     <string name="title_shipped">Shipped</string>
