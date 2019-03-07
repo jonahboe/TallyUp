@@ -13,6 +13,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static List<Category> inventory;
+    private static List<Item> sold;
+    private static List<Item> shipped;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
