@@ -8,7 +8,7 @@
         android:id="@+id/action_name"
         android:icon="@drawable/epic_plus"
         android:orderInCategory="0"
-        android:title="Text to be seen by user"
+        android:title="Add Item"
         app:showAsAction="always" />
 
 </menu>
