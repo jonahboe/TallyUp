@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_inventory"
@@ -16,5 +17,12 @@
         android:id="@+id/navigation_shipped"
         android:icon="@drawable/shipped"
         android:title="@string/title_shipped" />
+
+    <item
+        android:id="@+id/epic_plus"
+        android:icon="@drawable/epic_plus"
+        android:title="Plus"
+        app:showAsAction="always" />
+
 
 </menu>
