@@ -18,11 +18,4 @@
         android:icon="@drawable/shipped"
         android:title="@string/title_shipped" />
 
-    <item
-        android:id="@+id/epic_plus"
-        android:icon="@drawable/epic_plus"
-        android:title="Plus"
-        app:showAsAction="always" />
-
-
 </menu>
