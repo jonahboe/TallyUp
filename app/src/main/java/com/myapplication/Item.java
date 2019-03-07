@@ -1,6 +1,6 @@
 package com.myapplication;
 
-public class Items {
+public class Item {
     String name;
     float price;
     int quantity;
