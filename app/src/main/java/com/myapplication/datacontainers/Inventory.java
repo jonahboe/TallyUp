@@ -1,4 +1,4 @@
-package com.myapplication;
+package com.myapplication.datacontainers;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

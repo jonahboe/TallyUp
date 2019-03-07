@@ -6,11 +6,14 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import com.myapplication.datacontainers.Category;
+import com.myapplication.datacontainers.Inventory;
+import com.myapplication.datacontainers.Item;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddItemDialog.AddItemDialogListener {
 
     private static List<Category> inventory;
     private static List<Item> sold;
@@ -57,24 +60,28 @@ public class MainActivity extends AppCompatActivity {
     // Menu bar stuff
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Add our custom menu items
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // Get the item that called this function
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_name) {
+        // Check if it was the add button that was pressed
+        if (id == R.id.add_item_button) {
+            AddItemDialog addItemDialog = new AddItemDialog();
+            addItemDialog.show(getSupportFragmentManager(),"addItemDialog");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void returnText(String item, String category, int quantity) {
+        // TODO save the items received from the listener
+    }
 }

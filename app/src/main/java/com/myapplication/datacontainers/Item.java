@@ -1,4 +1,4 @@
-package com.myapplication;
+package com.myapplication.datacontainers;
 
 public class Item {
     String name;
