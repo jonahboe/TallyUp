@@ -10,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 public class AddItemDialog extends AppCompatDialogFragment {
 
     private EditText editTextItem;
     private EditText editTextCategory;
+    private EditText editTextPrice;
     private EditText editTextQuantity;
     private AddItemDialogListener listener;
 
@@ -39,13 +41,15 @@ public class AddItemDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String item = editTextItem.getText().toString();
                         String category = editTextCategory.getText().toString();
+                        float price = parseFloat(editTextPrice.getText().toString());
                         int quantity = parseInt(editTextQuantity.getText().toString());
-                        listener.returnText(item,category,quantity);
+                        listener.returnText(item,category,price,quantity);
                     }
                 });
 
         editTextItem = view.findViewById(R.id.itemText);
         editTextCategory = view.findViewById(R.id.categoryText);
+        editTextPrice = view.findViewById(R.id.priceText);
         editTextQuantity = view.findViewById(R.id.quantityText);
 
         return builder.create();
@@ -64,7 +68,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
 
     // An listener for our item adder
     public interface AddItemDialogListener {
-        void returnText(String item, String category, int quantity);
+        void returnText(String item, String category, float price, int quantity);
     }
 
 }

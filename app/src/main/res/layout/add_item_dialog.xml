@@ -20,10 +20,19 @@
         android:hint="Category" />
 
     <EditText
-        android:id="@+id/quantityText"
+        android:id="@+id/priceText"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/categoryText"
+        android:layout_marginTop="16dp"
+        android:hint="Price"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/quantityText"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/priceText"
         android:layout_marginTop="16dp"
         android:hint="Qty"
         android:inputType="number" />

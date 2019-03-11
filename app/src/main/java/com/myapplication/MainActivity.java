@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     }
 
     @Override
-    public void returnText(String item, String category, int quantity) {
+    public void returnText(String item, String category, float price, int quantity) {
         // TODO save the items received from the listener
     }
 }
