@@ -2,6 +2,7 @@ package com.myapplication.datacontainers;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -15,9 +16,11 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Inventory {
 
-    private List<Category> categories;
+    private static final String localKey = "SAVED_INVENTORY";
 
-    private String localKey = "SAVED_INVENTORY";
+    private static final String TAG = "Inventory";
+
+    private List<Category> categories;
 
     public List<Category> getCategories() {
         return categories;
@@ -58,7 +61,7 @@ public class Inventory {
             try {
                 br.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.getMessage());
             }
         }
 

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +15,8 @@ import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 public class AddItemDialog extends AppCompatDialogFragment {
+
+    private static final String TAG = "AddItemDialog";
 
     private EditText editTextItem;
     private EditText editTextCategory;
@@ -39,11 +42,15 @@ public class AddItemDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String item = editTextItem.getText().toString();
-                        String category = editTextCategory.getText().toString();
-                        float price = parseFloat(editTextPrice.getText().toString());
-                        int quantity = parseInt(editTextQuantity.getText().toString());
-                        listener.returnText(item,category,price,quantity);
+                        try {
+                            String item = editTextItem.getText().toString();
+                            String category = editTextCategory.getText().toString();
+                            float price = parseFloat(editTextPrice.getText().toString());
+                            int quantity = parseInt(editTextQuantity.getText().toString());
+                            listener.returnText(item, category, price, quantity);
+                        } catch (Exception e) {
+                            Log.e(TAG, e.getMessage());
+                        }
                     }
                 });
 
@@ -62,7 +69,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
         try {
             listener = (AddItemDialogListener) context;
         } catch (ClassCastException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage());
         }
     }
 
