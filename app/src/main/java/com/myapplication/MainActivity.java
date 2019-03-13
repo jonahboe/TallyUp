@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.myapplication.datacontainers.Category;
 import com.myapplication.datacontainers.Inventory;
@@ -83,5 +84,6 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     @Override
     public void returnText(String item, String category, float price, int quantity) {
         // TODO save the items received from the listener
+        new Toast(this).makeText(this,"Added item",Toast.LENGTH_LONG).show();
     }
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
@@ -39,7 +40,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
                         // Do nothing
                     }
                 })
-                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
@@ -47,8 +48,13 @@ public class AddItemDialog extends AppCompatDialogFragment {
                             String category = editTextCategory.getText().toString();
                             float price = parseFloat(editTextPrice.getText().toString());
                             int quantity = parseInt(editTextQuantity.getText().toString());
+                            Log.d("testing", item + ", " + category);
+                            if (item.matches("") || category.matches("")) {
+                                throw new Exception("Empty fields");
+                            }
                             listener.returnText(item, category, price, quantity);
                         } catch (Exception e) {
+                            new Toast(getContext()).makeText(getContext(),"Not added, please fill out all fields",Toast.LENGTH_LONG).show();
                             Log.e(TAG, e.getMessage());
                         }
                     }

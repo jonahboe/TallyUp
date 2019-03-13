@@ -3,4 +3,9 @@
     <string name="title_inventory">Inventory</string>
     <string name="title_sold">Sold</string>
     <string name="title_shipped">Shipped</string>
+
+    <string name="add_dialog_item">Item</string>
+    <string name="add_dialog_category">Category</string>
+    <string name="add_dialog_price">Price</string>
+    <string name="add_dialog_quantity">Qty</string>
 </resources>
