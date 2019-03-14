@@ -8,4 +8,5 @@
     <string name="add_dialog_category">Category</string>
     <string name="add_dialog_price">Price</string>
     <string name="add_dialog_quantity">Qty</string>
+    <string name="add_item_error">Not added, please fill out all fields</string>
 </resources>

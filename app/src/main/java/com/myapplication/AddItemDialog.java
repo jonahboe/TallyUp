@@ -54,7 +54,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
                             }
                             listener.returnText(item, category, price, quantity);
                         } catch (Exception e) {
-                            new Toast(getContext()).makeText(getContext(),"Not added, please fill out all fields",Toast.LENGTH_LONG).show();
+                            new Toast(getContext()).makeText(getContext(),R.string.add_item_error,Toast.LENGTH_LONG).show();
                             Log.e(TAG, e.getMessage());
                         }
                     }

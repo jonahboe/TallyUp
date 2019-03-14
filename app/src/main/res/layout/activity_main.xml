@@ -18,7 +18,7 @@
         app:menu="@menu/navigation" />
 
     <ExpandableListView
-        android:id="@+id/categories"
+        android:id="@+id/expandable_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@android:color/darker_gray"

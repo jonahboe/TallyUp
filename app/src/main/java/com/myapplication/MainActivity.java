@@ -44,9 +44,10 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
         // Load data
         inventory = new Inventory().loadInventory(this);
+        // TODO add code for loading sold and shipped
 
         // Setup our menu button
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         super.onPause();
 
         new Inventory().saveInventory(inventory, this);
+        // TODO save sold and shipped
     }
 
 
@@ -83,7 +85,8 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
     @Override
     public void returnText(String item, String category, float price, int quantity) {
+
         // TODO save the items received from the listener
-        new Toast(this).makeText(this,"Added item",Toast.LENGTH_LONG).show();
+        new Toast(this).makeText(this,"Item added",Toast.LENGTH_SHORT).show();
     }
 }
