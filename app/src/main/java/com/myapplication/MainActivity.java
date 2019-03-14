@@ -6,19 +6,24 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.myapplication.datacontainers.Category;
 import com.myapplication.datacontainers.Inventory;
 import com.myapplication.datacontainers.Item;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AddItemDialog.AddItemDialogListener {
 
+    private ExpandableListView listView;
+    private ExpandableListAdapter listAdapter;
+    private List<String> listDataCategories;
+    private HashMap<String,List<String>> listDataItems;
     private static List<Category> inventory;
-    private static List<Item> sold;
-    private static List<Item> shipped;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
