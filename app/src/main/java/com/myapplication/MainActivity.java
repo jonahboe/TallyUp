@@ -1,9 +1,11 @@
 package com.myapplication;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
@@ -20,8 +22,6 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
     private ExpandableListView listView;
     private ExpandableListAdapter listAdapter;
-    private List<String> listDataCategories;
-    private HashMap<String,List<String>> listDataItems;
     private static Inventory inventory;
 
 
@@ -47,19 +47,18 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Load saved inventory
-        inventory = new Inventory(this);
-        inventory.loadInventory();
-
         // Setup our menu
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        // Load saved inventory
+        inventory = new Inventory(this);
+        inventory.loadInventory();
+
         // Setup the list view
         listView = findViewById(R.id.expandable_list);
-        listDataCategories = inventory.getCategories();
-        listDataItems = inventory.getItems();
-        listAdapter = new ExpandableListAdapter(this,listDataCategories,listDataItems);
+        listAdapter = new ExpandableListAdapter(this,inventory.getCategories(),inventory.getItems());
+        listView.setAdapter(listAdapter);
     }
 
     @Override
@@ -97,8 +96,9 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     public void returnText(String item, String category, float price, int quantity) {
 
         inventory.addItem(item,category,price,quantity);
-        listDataCategories = inventory.getCategories();
-        listDataItems = inventory.getItems();
+
+        listAdapter.setDataCategory(inventory.getCategories());
+        listAdapter.setDataItem(inventory.getItems());
         listAdapter.notifyDataSetChanged();
 
         new Toast(this).makeText(this,"Item added",Toast.LENGTH_SHORT).show();

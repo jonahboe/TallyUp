@@ -24,6 +24,22 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         this.listHashMap = listHashMap;
     }
 
+    public List<String> getDataCategory() {
+        return listDataHeader;
+    }
+
+    public void setDataCategory(List<String> listDataHeader) {
+        this.listDataHeader = listDataHeader;
+    }
+
+    public HashMap<String, List<String>> getDataItem() {
+        return listHashMap;
+    }
+
+    public void setDataItem(HashMap<String, List<String>> listHashMap) {
+        this.listHashMap = listHashMap;
+    }
+
     @Override
     public int getGroupCount() {
         return listDataHeader.size();
