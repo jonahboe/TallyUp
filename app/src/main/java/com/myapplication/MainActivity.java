@@ -46,14 +46,17 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.icon);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         // Setup our menu
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // Load saved inventory
-        inventory = new Inventory(this);
-        inventory.loadInventory();
+        inventory = new Inventory();
+        inventory.loadInventory(this);
 
         // Setup the list view
         listView = findViewById(R.id.expandable_list);
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     protected void onPause() {
         super.onPause();
 
-        inventory.saveInventory();
+        inventory.saveInventory(this);
     }
 
 

@@ -12,7 +12,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -20,12 +19,6 @@ public class Inventory {
 
     private static final String localKey = "SAVED_INVENTORY";
     private static final String TAG = "Inventory";
-
-    private Activity parentActivity;
-
-    public Inventory(Activity activity) {
-        this.parentActivity = activity;
-    }
 
     private List<Category> inventory;
 
@@ -86,19 +79,27 @@ public class Inventory {
 
     }
 
-    public void saveInventory() {
+    public void saveInventory(Activity parentActivity) {
         // Create GSon string
+        Log.d("SaveInventory", "PointA");
         Gson gson = new Gson();
-        String jsonString = gson.toJson(this);
-
+        Log.d("SaveInventory", "PointB");
+        Inventory temp = new Inventory();
+        temp.setInventory(this.getInventory());
+        String jsonString = gson.toJson(temp);
+        Log.d("SaveInventory", "PointC");
         // Load to preferences
         SharedPreferences sharedPreferences = parentActivity.getPreferences(MODE_PRIVATE);
+        Log.d("SaveInventory", "PointD");
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        Log.d("SaveInventory", "PointE");
         editor.putString(localKey, jsonString);
+        Log.d("SaveInventory", "PointF");
         editor.commit();
+        Log.d("SaveInventory", "PointG");
     }
 
-    public void loadInventory() {
+    public void loadInventory(Activity parentActivity) {
         // Load preferences
         SharedPreferences sharedPreferences = parentActivity.getPreferences(MODE_PRIVATE);
         String jsonString = sharedPreferences.getString(localKey, null);
