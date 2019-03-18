@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     private ExpandableListAdapter listAdapter;
     private List<String> listDataCategories;
     private HashMap<String,List<String>> listDataItems;
-    private static List<Category> inventory;
+    private static Inventory inventory;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -47,21 +47,26 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Load data
-        inventory = new Inventory().loadInventory(this);
-        // TODO add code for loading sold and shipped
+        // Load saved inventory
+        inventory = new Inventory(this);
+        inventory.loadInventory();
 
-        // Setup our menu button
+        // Setup our menu
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        // Setup the list view
+        listView = findViewById(R.id.expandable_list);
+        listDataCategories = inventory.getCategories();
+        listDataItems = inventory.getItems();
+        listAdapter = new ExpandableListAdapter(this,listDataCategories,listDataItems);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
 
-        new Inventory().saveInventory(inventory, this);
-        // TODO save sold and shipped
+        inventory.saveInventory();
     }
 
 
@@ -91,7 +96,11 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     @Override
     public void returnText(String item, String category, float price, int quantity) {
 
-        // TODO save the items received from the listener
+        inventory.addItem(item,category,price,quantity);
+        listDataCategories = inventory.getCategories();
+        listDataItems = inventory.getItems();
+        listAdapter.notifyDataSetChanged();
+
         new Toast(this).makeText(this,"Item added",Toast.LENGTH_SHORT).show();
     }
 }

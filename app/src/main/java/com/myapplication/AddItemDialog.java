@@ -43,20 +43,24 @@ public class AddItemDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        String item = "";
+                        String category = "";
+                        float price = 0;
+                        int quantity = 0;
                         try {
-                            String item = editTextItem.getText().toString();
-                            String category = editTextCategory.getText().toString();
-                            float price = parseFloat(editTextPrice.getText().toString());
-                            int quantity = parseInt(editTextQuantity.getText().toString());
+                            item = editTextItem.getText().toString();
+                            category = editTextCategory.getText().toString();
+                            price = parseFloat(editTextPrice.getText().toString());
+                            quantity = parseInt(editTextQuantity.getText().toString());
                             Log.d("testing", item + ", " + category);
                             if (item.matches("") || category.matches("")) {
                                 throw new Exception("Empty fields");
                             }
-                            listener.returnText(item, category, price, quantity);
                         } catch (Exception e) {
                             new Toast(getContext()).makeText(getContext(),R.string.add_item_error,Toast.LENGTH_LONG).show();
                             Log.e(TAG, e.getMessage());
                         }
+                        listener.returnText(item, category, price, quantity);
                     }
                 });
 

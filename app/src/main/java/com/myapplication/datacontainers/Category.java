@@ -2,16 +2,18 @@ package com.myapplication.datacontainers;
 
 import java.util.ArrayList;
 
-public class Category extends Item {
-    String name;
-    ArrayList<Item> items;
+public class Category {
+    private String name;
+    private ArrayList<Item> items = new ArrayList<>();
 
-    @Override
+    public Category(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }

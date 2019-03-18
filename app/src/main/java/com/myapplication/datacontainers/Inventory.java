@@ -10,61 +10,114 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class Inventory {
 
     private static final String localKey = "SAVED_INVENTORY";
-
     private static final String TAG = "Inventory";
 
-    private List<Category> categories;
+    private Activity parentActivity;
 
-    public List<Category> getCategories() {
-        return categories;
+    public Inventory(Activity activity) {
+        this.parentActivity = activity;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    private List<Category> inventory;
+
+    public List<Category> getInventory() {
+        return this.inventory;
     }
 
-    public void saveInventory(List<Category> list, Activity a) {
+    public void setInventory(List<Category> categories) {
+        this.inventory = categories;
+    }
+
+    public List<String> getCategories() {
+        if (this.inventory != null) {
+            List<String> output = new ArrayList<>();
+            for (Category c : inventory) {
+                output.add(c.getName());
+            }
+            return output;
+        }
+        return null;
+    }
+
+    public HashMap<String,List<String>> getItems() {
+        if (this.inventory != null) {
+            HashMap<String,List<String>> output = new HashMap<>();
+            for (Category c : inventory) {
+                List<String> items = new ArrayList<>();
+                for (Item i : c.getItems()) {
+                    items.add(i.getName());
+                }
+                output.put(c.getName(),items);
+            }
+            return output;
+        }
+        return null;
+    }
+
+    public void addItem(String name, String cat , float price, int quantity) {
+        for (Category c : inventory) {
+            if (c.getName().equals(cat)) {
+                for (Item i : c.getItems()) {
+                    if (i.getName().equals(name)) {
+                        i.setQuantity(i.getQuantity() + quantity);
+                        return;
+                    }
+                }
+                c.addItem(new Item(name,price,quantity));
+                return;
+            }
+        }
+        Category c = new Category(cat);
+        c.addItem(new Item(name,price,quantity));
+        inventory.add(c);
+
+    }
+
+    public void removeItem() {
+
+    }
+
+    public void saveInventory() {
         // Create GSon string
-        categories = list;
         Gson gson = new Gson();
         String jsonString = gson.toJson(this);
 
         // Load to preferences
-        SharedPreferences sharedPreferences = a.getPreferences(MODE_PRIVATE);
+        SharedPreferences sharedPreferences = parentActivity.getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(localKey, jsonString);
         editor.commit();
     }
 
-    public List<Category> loadInventory(Activity a) {
+    public void loadInventory() {
         // Load preferences
-        SharedPreferences sharedPreferences = a.getPreferences(MODE_PRIVATE);
+        SharedPreferences sharedPreferences = parentActivity.getPreferences(MODE_PRIVATE);
         String jsonString = sharedPreferences.getString(localKey, null);
 
         // Load to GSon
-        Inventory i;
         if (jsonString == null) {
-            List<Category> c = new ArrayList<>();
-            return c;
+            this.inventory = new ArrayList<>();
         }
         else {
             Gson gson = new Gson();
             BufferedReader br = new BufferedReader(new StringReader(jsonString));
-            i = gson.fromJson(br, Inventory.class);
+            Inventory i = gson.fromJson(br, Inventory.class);
             try {
                 br.close();
             } catch (IOException e) {
                 Log.e(TAG, e.getMessage());
             }
-        }
 
-        return i.getCategories();
+            this.setInventory(i.getInventory());
+        }
     }
 }
