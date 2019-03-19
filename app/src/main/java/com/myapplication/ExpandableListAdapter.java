@@ -42,11 +42,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         this.listHashMap = listHashMap;
     }
 
-    public HashMap<String, List<Integer>> getListItemQuantity() {
+    public HashMap<String, List<Integer>> getDataItemQuantity() {
         return listItemQuantity;
     }
 
-    public void setListItemQuantity(HashMap<String, List<Integer>> listItemQuantity) {
+    public void setDataItemQuantity(HashMap<String, List<Integer>> listItemQuantity) {
         this.listItemQuantity = listItemQuantity;
     }
 

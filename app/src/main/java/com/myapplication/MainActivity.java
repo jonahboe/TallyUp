@@ -37,21 +37,21 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
                 case R.id.navigation_inventory:
                     listAdapter.setDataCategory(inventory.getCategories());
                     listAdapter.setDataItem(inventory.getItems());
-                    listAdapter.setListItemQuantity(inventory.getItemsQuantity());
+                    listAdapter.setDataItemQuantity(inventory.getItemsQuantity());
                     listAdapter.notifyDataSetChanged();
                     areInventoryView = true;
                     return true;
                 case R.id.navigation_sold:
                     listAdapter.setDataCategory(sold.getCategories());
                     listAdapter.setDataItem(sold.getItems());
-                    listAdapter.setListItemQuantity(sold.getItemsQuantity());
+                    listAdapter.setDataItemQuantity(sold.getItemsQuantity());
                     listAdapter.notifyDataSetChanged();
                     areInventoryView = false;
                     return true;
                 case R.id.navigation_shipped:
                     listAdapter.setDataCategory(shipped.getCategories());
                     listAdapter.setDataItem(shipped.getItems());
-                    listAdapter.setListItemQuantity(shipped.getItemsQuantity());
+                    listAdapter.setDataItemQuantity(shipped.getItemsQuantity());
                     listAdapter.notifyDataSetChanged();
                     areInventoryView = false;
                     return true;
@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         if(areInventoryView) {
             listAdapter.setDataCategory(inventory.getCategories());
             listAdapter.setDataItem(inventory.getItems());
+            listAdapter.setDataItemQuantity(inventory.getItemsQuantity());
             listAdapter.notifyDataSetChanged();
         }
 
