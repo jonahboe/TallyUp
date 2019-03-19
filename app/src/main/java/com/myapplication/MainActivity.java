@@ -37,18 +37,21 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
                 case R.id.navigation_inventory:
                     listAdapter.setDataCategory(inventory.getCategories());
                     listAdapter.setDataItem(inventory.getItems());
+                    listAdapter.setListItemQuantity(inventory.getItemsQuantity());
                     listAdapter.notifyDataSetChanged();
                     areInventoryView = true;
                     return true;
                 case R.id.navigation_sold:
                     listAdapter.setDataCategory(sold.getCategories());
                     listAdapter.setDataItem(sold.getItems());
+                    listAdapter.setListItemQuantity(sold.getItemsQuantity());
                     listAdapter.notifyDataSetChanged();
                     areInventoryView = false;
                     return true;
                 case R.id.navigation_shipped:
                     listAdapter.setDataCategory(shipped.getCategories());
                     listAdapter.setDataItem(shipped.getItems());
+                    listAdapter.setListItemQuantity(shipped.getItemsQuantity());
                     listAdapter.notifyDataSetChanged();
                     areInventoryView = false;
                     return true;
@@ -83,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
         // Setup the list view
         listView = findViewById(R.id.expandable_list);
-        listAdapter = new ExpandableListAdapter(this,inventory.getCategories(),inventory.getItems());
+        listAdapter = new ExpandableListAdapter(this,inventory.getCategories(),inventory.getItems(),inventory.getItemsQuantity());
         listView.setAdapter(listAdapter);
 
 

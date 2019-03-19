@@ -58,6 +58,21 @@ public class Inventory {
         return null;
     }
 
+    public HashMap<String,List<Integer>> getItemsQuantity() {
+        if (this.inventory != null) {
+            HashMap<String,List<Integer>> output = new HashMap<>();
+            for (Category c : inventory) {
+                List<Integer> items = new ArrayList<>();
+                for (Item i : c.getItems()) {
+                    items.add(i.getQuantity());
+                }
+                output.put(c.getName(),items);
+            }
+            return output;
+        }
+        return null;
+    }
+
     public void addItem(String name, String cat , float price, int quantity) {
         for (Category c : inventory) {
             if (c.getName().equals(cat)) {

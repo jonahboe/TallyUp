@@ -17,11 +17,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listHashMap;
+    private HashMap<String, List<Integer>> listItemQuantity;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
+    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap, HashMap<String, List<Integer>> listItemQuantity) {
         this.context = context;
         this.listDataHeader = listDataHeader;
         this.listHashMap = listHashMap;
+        this.listItemQuantity = listItemQuantity;
     }
 
     public List<String> getDataCategory() {
@@ -38,6 +40,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     public void setDataItem(HashMap<String, List<String>> listHashMap) {
         this.listHashMap = listHashMap;
+    }
+
+    public HashMap<String, List<Integer>> getListItemQuantity() {
+        return listItemQuantity;
+    }
+
+    public void setListItemQuantity(HashMap<String, List<Integer>> listItemQuantity) {
+        this.listItemQuantity = listItemQuantity;
     }
 
     @Override
@@ -98,6 +108,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         TextView txtListChild = (TextView)view.findViewById(R.id.item_name);
         txtListChild.setText(childText);
+
+        TextView itemQty = (TextView)view.findViewById(R.id.item_quantity);
+        itemQty.setText("Qty: " + Integer.toString(listItemQuantity.get(listDataHeader.get(i)).get(i1)));
+
         return view;
 
     }
