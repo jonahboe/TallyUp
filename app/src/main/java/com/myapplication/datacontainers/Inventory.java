@@ -17,7 +17,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Inventory {
 
-    private static final String localKey = "SAVED_INVENTORY";
+    public static final String savedInventoryKey = "SAVED_INVENTORY";
+    public static final String savedSoldKey = "SAVED_SOLD";
+    public static final String savedShippedKey = "SAVED_SHIPPED";
     private static final String TAG = "Inventory";
 
     private List<Category> inventory;
@@ -79,30 +81,23 @@ public class Inventory {
 
     }
 
-    public void saveInventory(Activity parentActivity) {
+    public void saveInventory(Activity parentActivity, String key) {
         // Create GSon string
-        Log.d("SaveInventory", "PointA");
         Gson gson = new Gson();
-        Log.d("SaveInventory", "PointB");
         Inventory temp = new Inventory();
         temp.setInventory(this.getInventory());
         String jsonString = gson.toJson(temp);
-        Log.d("SaveInventory", "PointC");
         // Load to preferences
         SharedPreferences sharedPreferences = parentActivity.getPreferences(MODE_PRIVATE);
-        Log.d("SaveInventory", "PointD");
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        Log.d("SaveInventory", "PointE");
-        editor.putString(localKey, jsonString);
-        Log.d("SaveInventory", "PointF");
+        editor.putString(key, jsonString);
         editor.commit();
-        Log.d("SaveInventory", "PointG");
     }
 
-    public void loadInventory(Activity parentActivity) {
+    public void loadInventory(Activity parentActivity, String key) {
         // Load preferences
         SharedPreferences sharedPreferences = parentActivity.getPreferences(MODE_PRIVATE);
-        String jsonString = sharedPreferences.getString(localKey, null);
+        String jsonString = sharedPreferences.getString(key, null);
 
         // Load to GSon
         if (jsonString == null) {

@@ -20,9 +20,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AddItemDialog.AddItemDialogListener {
 
+    private boolean areInventoryView = true;
     private ExpandableListView listView;
     private ExpandableListAdapter listAdapter;
     private static Inventory inventory;
+    private static Inventory sold;
+    private static Inventory shipped;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -32,10 +35,22 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_inventory:
+                    listAdapter.setDataCategory(inventory.getCategories());
+                    listAdapter.setDataItem(inventory.getItems());
+                    listAdapter.notifyDataSetChanged();
+                    areInventoryView = true;
                     return true;
                 case R.id.navigation_sold:
+                    listAdapter.setDataCategory(sold.getCategories());
+                    listAdapter.setDataItem(sold.getItems());
+                    listAdapter.notifyDataSetChanged();
+                    areInventoryView = false;
                     return true;
                 case R.id.navigation_shipped:
+                    listAdapter.setDataCategory(shipped.getCategories());
+                    listAdapter.setDataItem(shipped.getItems());
+                    listAdapter.notifyDataSetChanged();
+                    areInventoryView = false;
                     return true;
             }
             return false;
@@ -56,19 +71,32 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
         // Load saved inventory
         inventory = new Inventory();
-        inventory.loadInventory(this);
+        inventory.loadInventory(this, Inventory.savedInventoryKey);
+
+        // Load saved sold list
+        sold = new Inventory();
+        sold.loadInventory(this, Inventory.savedSoldKey);
+
+        // Load saved shipped list
+        shipped = new Inventory();
+        shipped.loadInventory(this, Inventory.savedShippedKey);
 
         // Setup the list view
         listView = findViewById(R.id.expandable_list);
         listAdapter = new ExpandableListAdapter(this,inventory.getCategories(),inventory.getItems());
         listView.setAdapter(listAdapter);
+
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
 
-        inventory.saveInventory(this);
+        inventory.saveInventory(this, Inventory.savedInventoryKey);
+        sold.saveInventory(this, Inventory.savedSoldKey);
+        shipped.saveInventory(this, Inventory.savedShippedKey);
+
     }
 
 
@@ -100,9 +128,11 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
         inventory.addItem(item,category,price,quantity);
 
-        listAdapter.setDataCategory(inventory.getCategories());
-        listAdapter.setDataItem(inventory.getItems());
-        listAdapter.notifyDataSetChanged();
+        if(areInventoryView) {
+            listAdapter.setDataCategory(inventory.getCategories());
+            listAdapter.setDataItem(inventory.getItems());
+            listAdapter.notifyDataSetChanged();
+        }
 
         new Toast(this).makeText(this,"Item added",Toast.LENGTH_SHORT).show();
     }
