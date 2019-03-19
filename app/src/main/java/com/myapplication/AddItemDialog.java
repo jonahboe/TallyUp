@@ -56,11 +56,12 @@ public class AddItemDialog extends AppCompatDialogFragment {
                             if (item.matches("") || category.matches("")) {
                                 throw new Exception("Empty fields");
                             }
+                            listener.returnText(item, category, price, quantity);
                         } catch (Exception e) {
                             new Toast(getContext()).makeText(getContext(),R.string.add_item_error,Toast.LENGTH_LONG).show();
                             Log.e(TAG, e.getMessage());
                         }
-                        listener.returnText(item, category, price, quantity);
+
                     }
                 });
 
