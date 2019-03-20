@@ -2,49 +2,55 @@ package com.myapplication;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * An expandable list adapter implementing a custom expandableListView.xml. This adapter holds
+ * categories (headers), and items (sub-items).
+ */
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private List<String> listDataHeader;
-    private HashMap<String, List<String>> listHashMap;
+    private List<String> listDataCategory;
+    private HashMap<String, List<String>> listDataItem;
     private HashMap<String, List<Integer>> listItemQuantity;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap, HashMap<String, List<Integer>> listItemQuantity) {
+    /**
+     * Non-default expandable list adapter creates a new adapter instance using the following
+     * parameters.
+     * @param context The context of the view.
+     * @param listDataCategory The header holds a list of strings (the categories).
+     * @param listDataItem The hash holds the individual items, the keys being the categories in the listDataCategory
+     * @param listItemQuantity A hash holding the quantities of each item, the keys are in listDataCategory
+     */
+    public ExpandableListAdapter(Context context, List<String> listDataCategory, HashMap<String, List<String>> listDataItem, HashMap<String, List<Integer>> listItemQuantity) {
         this.context = context;
-        this.listDataHeader = listDataHeader;
-        this.listHashMap = listHashMap;
+        this.listDataCategory = listDataCategory;
+        this.listDataItem = listDataItem;
         this.listItemQuantity = listItemQuantity;
     }
 
     public List<String> getDataCategory() {
-        return listDataHeader;
+        return listDataCategory;
     }
 
     public void setDataCategory(List<String> listDataHeader) {
-        this.listDataHeader = listDataHeader;
+        this.listDataCategory = listDataHeader;
     }
 
     public HashMap<String, List<String>> getDataItem() {
-        return listHashMap;
+        return listDataItem;
     }
 
     public void setDataItem(HashMap<String, List<String>> listHashMap) {
-        this.listHashMap = listHashMap;
+        this.listDataItem = listHashMap;
     }
 
     public HashMap<String, List<Integer>> getDataItemQuantity() {
@@ -57,22 +63,22 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return listDataHeader.size();
+        return listDataCategory.size();
     }
 
     @Override
     public int getChildrenCount(int i) {
-        return listHashMap.get(listDataHeader.get(i)).size();
+        return listDataItem.get(listDataCategory.get(i)).size();
     }
 
     @Override
     public Object getGroup(int i) {
-        return listDataHeader.get(i);
+        return listDataCategory.get(i);
     }
 
     @Override
     public Object getChild(int i, int i1) {
-        return listHashMap.get(listDataHeader.get(i)).get(i1);
+        return listDataItem.get(listDataCategory.get(i)).get(i1);
     }
 
     @Override
@@ -124,7 +130,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         txtListChild.setText(childText);
 
         TextView itemQty = (TextView)view.findViewById(R.id.item_quantity);
-        itemQty.setText("Qty: " + Integer.toString(listItemQuantity.get(listDataHeader.get(i)).get(i1)));
+        itemQty.setText("Qty: " + Integer.toString(listItemQuantity.get(listDataCategory.get(i)).get(i1)));
 
         view.setBackgroundResource(android.R.drawable.menuitem_background);
         return view;
