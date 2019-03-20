@@ -56,7 +56,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
                             if (item.matches("") || category.matches("")) {
                                 throw new Exception("Empty fields");
                             }
-                            listener.returnText(item, category, price, quantity);
+                            listener.onAddedItem(item, category, price, quantity);
                         } catch (Exception e) {
                             new Toast(getContext()).makeText(getContext(),R.string.add_item_error,Toast.LENGTH_LONG).show();
                             Log.e(TAG, e.getMessage());
@@ -86,7 +86,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
 
     // An listener for our item adder
     public interface AddItemDialogListener {
-        void returnText(String item, String category, float price, int quantity);
+        void onAddedItem(String item, String category, float price, int quantity);
     }
 
 }

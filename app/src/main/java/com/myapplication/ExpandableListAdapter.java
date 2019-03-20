@@ -2,11 +2,16 @@ package com.myapplication;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -92,9 +97,18 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_view_category,null);
         }
-        TextView listHeader = (TextView)view.findViewById(R.id.category_name);
+        final TextView listHeader = (TextView)view.findViewById(R.id.category_name);
         listHeader.setTypeface(null, Typeface.BOLD);
         listHeader.setText(headerTitle);
+
+        ImageButton button = (ImageButton)view.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.onInfoButtonPressed(listHeader.getText().toString());
+            }
+        });
+
         return view;
     }
 
@@ -112,8 +126,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView itemQty = (TextView)view.findViewById(R.id.item_quantity);
         itemQty.setText("Qty: " + Integer.toString(listItemQuantity.get(listDataHeader.get(i)).get(i1)));
 
+        view.setBackgroundResource(android.R.drawable.menuitem_background);
         return view;
-
     }
 
     @Override

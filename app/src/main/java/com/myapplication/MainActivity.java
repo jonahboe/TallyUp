@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.myapplication.datacontainers.Category;
 import com.myapplication.datacontainers.Inventory;
@@ -26,8 +29,6 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     private static Inventory inventory;
     private static Inventory sold;
     private static Inventory shipped;
-
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -88,8 +89,6 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         listView = findViewById(R.id.expandable_list);
         listAdapter = new ExpandableListAdapter(this,inventory.getCategories(),inventory.getItems(),inventory.getItemsQuantity());
         listView.setAdapter(listAdapter);
-
-
     }
 
     @Override
@@ -99,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         inventory.saveInventory(this, Inventory.savedInventoryKey);
         sold.saveInventory(this, Inventory.savedSoldKey);
         shipped.saveInventory(this, Inventory.savedShippedKey);
-
     }
 
 
@@ -127,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     }
 
     @Override
-    public void returnText(String item, String category, float price, int quantity) {
+    public void onAddedItem(String item, String category, float price, int quantity) {
 
         inventory.addItem(item,category,price,quantity);
 
@@ -140,4 +138,9 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
         new Toast(this).makeText(this,"Item added",Toast.LENGTH_SHORT).show();
     }
+
+    public static void onInfoButtonPressed(String category) {
+        Log.d("YourIt", "Info button is clicked: " + category);
+    }
+
 }
