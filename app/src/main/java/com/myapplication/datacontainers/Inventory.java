@@ -28,10 +28,18 @@ public class Inventory {
         return this.inventory;
     }
 
+    /**
+     * Setting the categories in the inventory.
+     * @param categories is passed in, to set the inventory in the category.
+     */
     public void setInventory(List<Category> categories) {
         this.inventory = categories;
     }
 
+    /**
+     * You want to get your category? This is how it's gotten.
+     * @return the output if it's not null, otherwise return null.
+     */
     public List<String> getCategories() {
         if (this.inventory != null) {
             List<String> output = new ArrayList<>();
@@ -43,6 +51,10 @@ public class Inventory {
         return null;
     }
 
+    /**
+     * A Hashmap to get the items, to add items to the actual list.
+     * @return returns the output if not null.
+     */
     public HashMap<String,List<String>> getItems() {
         if (this.inventory != null) {
             HashMap<String,List<String>> output = new HashMap<>();
@@ -58,6 +70,10 @@ public class Inventory {
         return null;
     }
 
+    /**
+     * A Hashmap to get the item quantity to be able to display to the user.
+     * @return returns the output if not null.
+     */
     public HashMap<String,List<Integer>> getItemsQuantity() {
         if (this.inventory != null) {
             HashMap<String,List<Integer>> output = new HashMap<>();
@@ -73,6 +89,13 @@ public class Inventory {
         return null;
     }
 
+    /**
+     * This is actually adding the item for the app to see.
+     * @param name the item.
+     * @param cat the category.
+     * @param price the price of said item.
+     * @param quantity the amount of that item you have.
+     */
     public void addItem(String name, String cat , float price, int quantity) {
         for (Category c : inventory) {
             if (c.getName().equals(cat)) {
@@ -92,10 +115,18 @@ public class Inventory {
 
     }
 
+    /**
+     * The ability to remove the items.
+     */
     public void removeItem() {
 
     }
 
+    /**
+     * Saves the inventory, so you don't have to continue to add things when you use the app.
+     * @param parentActivity the name of the activity.
+     * @param key the key needed.
+     */
     public void saveInventory(Activity parentActivity, String key) {
         // Create GSon string
         Gson gson = new Gson();
@@ -109,6 +140,11 @@ public class Inventory {
         editor.commit();
     }
 
+    /**
+     * Load the inventory, so the app loads on startup, to see your beautiful list.
+     * @param parentActivity the name of the activity
+     * @param key the key needed.
+     */
     public void loadInventory(Activity parentActivity, String key) {
         // Load preferences
         SharedPreferences sharedPreferences = parentActivity.getPreferences(MODE_PRIVATE);

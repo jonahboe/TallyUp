@@ -30,18 +30,34 @@ public class Category {
         this.name = name;
     }
 
+    /**
+     * A getter for the list of items in each category.
+     * @return the items specified
+     */
     public ArrayList<Item> getItems() {
         return items;
     }
 
+    /**
+     * A setter to set the item into the list for the category.
+     * @param items sets the item, it's how you set the items.
+     */
     public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
 
+    /**
+     * Items can be added to the list.
+     * @param i passing in the item that will be added.
+     */
     void addItem(Item i) {
         items.add(i);
     }
 
+    /**
+     * Items can be remove from the list.
+     * @param i passing in the item to be removed.
+     */
     void removeItem(Item i) {
         items.remove(i);
     }
