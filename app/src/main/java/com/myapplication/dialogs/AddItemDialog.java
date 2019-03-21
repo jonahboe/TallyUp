@@ -34,6 +34,11 @@ public class AddItemDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.add_item_dialog,null);
 
+        editTextItem = view.findViewById(R.id.itemText);
+        editTextCategory = view.findViewById(R.id.categoryText);
+        editTextPrice = view.findViewById(R.id.priceText);
+        editTextQuantity = view.findViewById(R.id.quantityText);
+
         builder.setView(view)
                 .setTitle("Add Item")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -66,11 +71,6 @@ public class AddItemDialog extends AppCompatDialogFragment {
 
                     }
                 });
-
-        editTextItem = view.findViewById(R.id.itemText);
-        editTextCategory = view.findViewById(R.id.categoryText);
-        editTextPrice = view.findViewById(R.id.priceText);
-        editTextQuantity = view.findViewById(R.id.quantityText);
 
         return builder.create();
     }

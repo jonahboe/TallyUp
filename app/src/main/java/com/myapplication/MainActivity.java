@@ -12,8 +12,11 @@ import android.widget.Toast;
 
 import com.myapplication.datacontainers.Inventory;
 import com.myapplication.dialogs.AddItemDialog;
+import com.myapplication.dialogs.CategoryOptionDialog;
 
-public class MainActivity extends AppCompatActivity implements AddItemDialog.AddItemDialogListener, ExpandableListAdapter.CategoryOptionsButtonListener {
+public class MainActivity extends AppCompatActivity implements AddItemDialog.AddItemDialogListener,
+                                                               CategoryOptionDialog.CategoryMoreDialogListener,
+                                                               ExpandableListAdapter.CategoryOptionsButtonListener {
 
     private ExpandableListView listView;
     private ExpandableListAdapter listAdapter;
@@ -133,7 +136,18 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
     @Override
     public void onOptionButtonPressed(String category) {
-        Log.d("YourIt", "Info button is clicked: " + category);
+        CategoryOptionDialog dialog = new CategoryOptionDialog();
+        dialog.setCategory(category);
+        dialog.show(getSupportFragmentManager(),"categoryMoreDialog");
     }
 
+    @Override
+    public void onDeleteCategory(String category) {
+
+    }
+
+    @Override
+    public void onRenameCategory(String oldName, String newName) {
+        Log.d(CategoryOptionDialog.TAG, "Renamed \"" + oldName + "\" to \"" +newName + "\"");
+    }
 }
