@@ -3,27 +3,31 @@ package com.myapplication.datacontainers;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.util.Log;
-
 import com.google.gson.Gson;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ * Holds one instance of a set of inventory. Contains a list of category names, which are in
+ * connection with actual category objects and their associated items.
+ */
 public class Inventory {
 
     public static final String savedInventoryKey = "SAVED_INVENTORY";
     public static final String savedSoldKey = "SAVED_SOLD";
     public static final String savedShippedKey = "SAVED_SHIPPED";
     private static final String TAG = "Inventory";
-
     private List<Category> inventory;
 
+    /**
+     * Gets a list of the category names held within inventory.
+     * @return
+     */
     public List<Category> getInventory() {
         return this.inventory;
     }

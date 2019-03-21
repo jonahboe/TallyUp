@@ -2,7 +2,11 @@ package com.myapplication.datacontainers;
 
 import java.util.ArrayList;
 
+/**
+ * A category which holds one set of items for an inventory to draw from.
+ */
 public class Category {
+
     private String name;
     private ArrayList<Item> items = new ArrayList<>();
 
