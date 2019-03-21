@@ -1,4 +1,4 @@
-package com.myapplication;
+package com.myapplication.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.myapplication.R;
 
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;

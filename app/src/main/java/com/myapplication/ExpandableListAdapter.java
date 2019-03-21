@@ -3,7 +3,6 @@ package com.myapplication;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,7 @@ import java.util.List;
  */
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
-    private InfoButtonListener listener;
+    private CategoryOptionsButtonListener listener;
     private Context context;
     private List<String> listDataCategory;
     private HashMap<String, List<String>> listDataItem;
@@ -29,7 +28,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * Non-default expandable list adapter creates a new adapter instance using the following
-     * parameters. It also sets an info button listener for each of the categories.
+     * parameters. It also sets an more button listener for each of the categories.
      * @param context The context of the view.
      * @param listDataCategory The header holds a list of strings (the categories).
      * @param listDataItem The hash holds the individual items, the keys being the categories in the listDataCategory
@@ -42,7 +41,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         this.listItemQuantity = listItemQuantity;
 
         try {
-            listener = (InfoButtonListener) context;
+            listener = (CategoryOptionsButtonListener) context;
         } catch (ClassCastException e) {
             Log.e("ExpandableListAdapter", e.getMessage());
         }
@@ -118,11 +117,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         listHeader.setTypeface(null, Typeface.BOLD);
         listHeader.setText(headerTitle);
 
-        ImageButton button = view.findViewById(R.id.button);
+        ImageButton button = view.findViewById(R.id.option_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onInfoButtonPressed(listHeader.getText().toString());
+                listener.onOptionButtonPressed(listHeader.getText().toString());
             }
         });
 
@@ -154,8 +153,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     // An listener for our item adder
-    public interface InfoButtonListener {
-        void onInfoButtonPressed(String infoCategory);
+    public interface CategoryOptionsButtonListener {
+        void onOptionButtonPressed(String infoCategory);
     }
 
 }
