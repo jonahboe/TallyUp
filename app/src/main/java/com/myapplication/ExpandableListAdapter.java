@@ -1,7 +1,10 @@
 package com.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,8 @@ import java.util.List;
  * categories (headers), and items (sub-items).
  */
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
+
+    private InfoButtonListener listener;
     private Context context;
     private List<String> listDataCategory;
     private HashMap<String, List<String>> listDataItem;
@@ -24,7 +29,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     /**
      * Non-default expandable list adapter creates a new adapter instance using the following
-     * parameters.
+     * parameters. It also sets an info button listener for each of the categories.
      * @param context The context of the view.
      * @param listDataCategory The header holds a list of strings (the categories).
      * @param listDataItem The hash holds the individual items, the keys being the categories in the listDataCategory
@@ -35,6 +40,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         this.listDataCategory = listDataCategory;
         this.listDataItem = listDataItem;
         this.listItemQuantity = listItemQuantity;
+
+        try {
+            listener = (InfoButtonListener) context;
+        } catch (ClassCastException e) {
+            Log.e("ExpandableListAdapter", e.getMessage());
+        }
     }
 
     public List<String> getDataCategory() {
@@ -103,15 +114,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_view_category,null);
         }
-        final TextView listHeader = (TextView)view.findViewById(R.id.category_name);
+        final TextView listHeader = view.findViewById(R.id.category_name);
         listHeader.setTypeface(null, Typeface.BOLD);
         listHeader.setText(headerTitle);
 
-        ImageButton button = (ImageButton)view.findViewById(R.id.button);
+        ImageButton button = view.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.onInfoButtonPressed(listHeader.getText().toString());
+                listener.onInfoButtonPressed(listHeader.getText().toString());
             }
         });
 
@@ -119,6 +130,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
+    @SuppressLint("SetTextI18n")
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
         final String childText = (String)getChild(i,i1);
         if(view == null) {
@@ -126,10 +138,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             view = inflater.inflate(R.layout.list_view_item,null);
         }
 
-        TextView txtListChild = (TextView)view.findViewById(R.id.item_name);
+        TextView txtListChild = view.findViewById(R.id.item_name);
         txtListChild.setText(childText);
 
-        TextView itemQty = (TextView)view.findViewById(R.id.item_quantity);
+        TextView itemQty = view.findViewById(R.id.item_quantity);
         itemQty.setText("Qty: " + Integer.toString(listItemQuantity.get(listDataCategory.get(i)).get(i1)));
 
         view.setBackgroundResource(android.R.drawable.menuitem_background);
@@ -140,4 +152,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int i, int i1) {
         return true;
     }
+
+    // An listener for our item adder
+    public interface InfoButtonListener {
+        void onInfoButtonPressed(String infoCategory);
+    }
+
 }

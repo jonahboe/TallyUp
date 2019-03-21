@@ -21,11 +21,11 @@ import com.myapplication.datacontainers.Item;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AddItemDialog.AddItemDialogListener {
+public class MainActivity extends AppCompatActivity implements AddItemDialog.AddItemDialogListener, ExpandableListAdapter.InfoButtonListener {
 
-    private boolean areInventoryView = true;
     private ExpandableListView listView;
     private ExpandableListAdapter listAdapter;
+    private boolean areInventoryView = true;
     private static Inventory inventory;
     private static Inventory sold;
     private static Inventory shipped;
@@ -139,7 +139,8 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         new Toast(this).makeText(this,"Item added",Toast.LENGTH_SHORT).show();
     }
 
-    public static void onInfoButtonPressed(String category) {
+    @Override
+    public void onInfoButtonPressed(String category) {
         Log.d("YourIt", "Info button is clicked: " + category);
     }
 
