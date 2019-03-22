@@ -31,23 +31,23 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_inventory:
-                    listAdapter.setDataCategory(inventory.getCategories());
-                    listAdapter.setDataItem(inventory.getItems());
-                    listAdapter.setDataItemQuantity(inventory.getItemsQuantity());
+                    listAdapter.setDataCategory(inventory.getCategoriesList());
+                    listAdapter.setDataItem(inventory.getItemsMap());
+                    listAdapter.setDataItemQuantity(inventory.getItemsQuantityMap());
                     listAdapter.notifyDataSetChanged();
                     areInventoryView = true;
                     return true;
                 case R.id.navigation_sold:
-                    listAdapter.setDataCategory(sold.getCategories());
-                    listAdapter.setDataItem(sold.getItems());
-                    listAdapter.setDataItemQuantity(sold.getItemsQuantity());
+                    listAdapter.setDataCategory(sold.getCategoriesList());
+                    listAdapter.setDataItem(sold.getItemsMap());
+                    listAdapter.setDataItemQuantity(sold.getItemsQuantityMap());
                     listAdapter.notifyDataSetChanged();
                     areInventoryView = false;
                     return true;
                 case R.id.navigation_shipped:
-                    listAdapter.setDataCategory(shipped.getCategories());
-                    listAdapter.setDataItem(shipped.getItems());
-                    listAdapter.setDataItemQuantity(shipped.getItemsQuantity());
+                    listAdapter.setDataCategory(shipped.getCategoriesList());
+                    listAdapter.setDataItem(shipped.getItemsMap());
+                    listAdapter.setDataItemQuantity(shipped.getItemsQuantityMap());
                     listAdapter.notifyDataSetChanged();
                     areInventoryView = false;
                     return true;
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
         // Setup the list view
         listView = findViewById(R.id.expandable_list);
-        listAdapter = new ExpandableListAdapter(this,inventory.getCategories(),inventory.getItems(),inventory.getItemsQuantity());
+        listAdapter = new ExpandableListAdapter(this,inventory.getCategoriesList(),inventory.getItemsMap(),inventory.getItemsQuantityMap());
         listView.setAdapter(listAdapter);
     }
 
@@ -125,9 +125,9 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         inventory.addItem(item,category,price,quantity);
 
         if(areInventoryView) {
-            listAdapter.setDataCategory(inventory.getCategories());
-            listAdapter.setDataItem(inventory.getItems());
-            listAdapter.setDataItemQuantity(inventory.getItemsQuantity());
+            listAdapter.setDataCategory(inventory.getCategoriesList());
+            listAdapter.setDataItem(inventory.getItemsMap());
+            listAdapter.setDataItemQuantity(inventory.getItemsQuantityMap());
             listAdapter.notifyDataSetChanged();
         }
 
@@ -143,11 +143,25 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
     @Override
     public void onDeleteCategory(String category) {
+        inventory.deleteCategory(category);
 
+        if(areInventoryView) {
+            listAdapter.setDataCategory(inventory.getCategoriesList());
+            listAdapter.setDataItem(inventory.getItemsMap());
+            listAdapter.setDataItemQuantity(inventory.getItemsQuantityMap());
+            listAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
     public void onRenameCategory(String oldName, String newName) {
-        Log.d(CategoryOptionDialog.TAG, "Renamed \"" + oldName + "\" to \"" +newName + "\"");
+        inventory.renameCategory(oldName, newName);
+
+        if(areInventoryView) {
+            listAdapter.setDataCategory(inventory.getCategoriesList());
+            listAdapter.setDataItem(inventory.getItemsMap());
+            listAdapter.setDataItemQuantity(inventory.getItemsQuantityMap());
+            listAdapter.notifyDataSetChanged();
+        }
     }
 }

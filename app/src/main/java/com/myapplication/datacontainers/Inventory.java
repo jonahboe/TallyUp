@@ -44,7 +44,7 @@ public class Inventory {
      * You want to get your category? This is how it's gotten.
      * @return the output if it's not null, otherwise return null.
      */
-    public List<String> getCategories() {
+    public List<String> getCategoriesList() {
         if (this.inventory != null) {
             List<String> output = new ArrayList<>();
             for (Category c : inventory) {
@@ -59,7 +59,7 @@ public class Inventory {
      * A Hashmap to get the items, to add items to the actual list.
      * @return returns the output if not null.
      */
-    public HashMap<String,List<String>> getItems() {
+    public HashMap<String,List<String>> getItemsMap() {
         if (this.inventory != null) {
             HashMap<String,List<String>> output = new HashMap<>();
             for (Category c : inventory) {
@@ -78,7 +78,7 @@ public class Inventory {
      * A Hashmap to get the item quantity to be able to display to the user.
      * @return returns the output if not null.
      */
-    public HashMap<String,List<Integer>> getItemsQuantity() {
+    public HashMap<String,List<Integer>> getItemsQuantityMap() {
         if (this.inventory != null) {
             HashMap<String,List<Integer>> output = new HashMap<>();
             for (Category c : inventory) {
@@ -127,10 +127,34 @@ public class Inventory {
     }
 
     /**
+     * Change the name of a category
+     * @param oldName
+     * @param newName
+     */
+    public void renameCategory(String oldName, String newName) {
+        ArrayList<Category> toRemove = new ArrayList<>();
+        for (Category c : inventory) {
+            if (c.getName().equals(oldName))
+                toRemove.add(c);
+        }
+        for (Category c : toRemove) {
+            c.setName(newName);
+        }
+    }
+
+    /**
      * Delete a category from the inventory
+     * @param category the name of the category to be deleted
      */
     public void deleteCategory(String category) {
-
+        ArrayList<Category> toRemove = new ArrayList<>();
+        for (Category c : inventory) {
+            if (c.getName().equals(category))
+                toRemove.add(c);
+        }
+        for (Category c : toRemove) {
+            inventory.remove(c);
+        }
     }
 
     /**
