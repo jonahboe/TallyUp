@@ -22,7 +22,7 @@ public class Inventory {
     public static final String savedSoldKey = "SAVED_SOLD";
     public static final String savedShippedKey = "SAVED_SHIPPED";
     private static final String TAG = "Inventory";
-    private List<Category> inventory;
+    private List<Category> inventory = new ArrayList<>();
 
     /**
      * Gets a list of the category names held within inventory.
