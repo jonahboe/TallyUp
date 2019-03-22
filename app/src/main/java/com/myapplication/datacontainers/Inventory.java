@@ -127,6 +127,13 @@ public class Inventory {
     }
 
     /**
+     * Delete a category from the inventory
+     */
+    public void deleteCategory(String category) {
+
+    }
+
+    /**
      * Saves the inventory, so you don't have to continue to add things when you use the app.
      * @param parentActivity the name of the activity.
      * @param key the key needed.

@@ -54,7 +54,7 @@ public class Category {
      * Items can be added to the list.
      * @param i passing in the item that will be added.
      */
-    void addItem(Item i) {
+    public void addItem(Item i) {
         items.add(i);
     }
 
@@ -62,7 +62,7 @@ public class Category {
      * Items can be remove from the list.
      * @param i passing in the item to be removed.
      */
-    void removeItem(Item i) {
+    public void removeItem(Item i) {
         items.remove(i);
     }
 }
