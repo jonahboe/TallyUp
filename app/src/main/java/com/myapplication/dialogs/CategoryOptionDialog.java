@@ -120,10 +120,6 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
     /**
      * A listener for our item adder
      */
-    public interface CategoryMoreDialogListener {
-        void onDeleteCategory(String category);
-
-    // An listener for our item adder
     public interface CategoryDialogListener {
         void onRenameCategory(String oldName, String newName);
         void onDeleteCategory(String category);
