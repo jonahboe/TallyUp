@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     private static Inventory sold;
     private static Inventory shipped;
 
-    private void updateListAddapter(Inventory i) {
+    private void updateListAdapter(Inventory i) {
         listAdapter.setDataCategory(i.getCategoriesList());
         listAdapter.setDataItem(i.getItemsMap());
         listAdapter.setDataItemQuantity(i.getItemsQuantityMap());
@@ -141,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         inventory.addItem(item,category,price,quantity);
 
         if(selectedView.equals(SELECTED_INVENTORY)) {
-            updateListAddapter(inventory);
+            updateListAdapter(inventory);
         }
 
         new Toast(this).makeText(this,"Item added",Toast.LENGTH_SHORT).show();
@@ -159,15 +158,15 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
         if(selectedView.equals(SELECTED_INVENTORY)) {
             inventory.deleteCategory(category);
-            updateListAddapter(inventory);
+            updateListAdapter(inventory);
         }
         if(selectedView.equals(SELECTED_SOLD)) {
             sold.deleteCategory(category);
-            updateListAddapter(sold);
+            updateListAdapter(sold);
         }
         if(selectedView.equals(SELECTED_SHIPPED)) {
             shipped.deleteCategory(category);
-            updateListAddapter(shipped);
+            updateListAdapter(shipped);
         }
     }
 
@@ -176,15 +175,15 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
         if(selectedView.equals(SELECTED_INVENTORY)) {
             inventory.renameCategory(oldName, newName);
-            updateListAddapter(inventory);
+            updateListAdapter(inventory);
         }
         if(selectedView.equals(SELECTED_SOLD)) {
             sold.renameCategory(oldName, newName);
-            updateListAddapter(sold);
+            updateListAdapter(sold);
         }
         if(selectedView.equals(SELECTED_SHIPPED)) {
             shipped.renameCategory(oldName, newName);
-            updateListAddapter(shipped);
+            updateListAdapter(shipped);
         }
     }
 
@@ -201,15 +200,15 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
         if(selectedView.equals(SELECTED_INVENTORY)) {
             inventory.renameItem(category, oldName, newName);
-            updateListAddapter(inventory);
+            updateListAdapter(inventory);
         }
         if(selectedView.equals(SELECTED_SOLD)) {
             sold.renameItem(category, oldName, newName);
-            updateListAddapter(sold);
+            updateListAdapter(sold);
         }
         if(selectedView.equals(SELECTED_SHIPPED)) {
             shipped.renameItem(category, oldName, newName);
-            updateListAddapter(shipped);
+            updateListAdapter(shipped);
         }
     }
 
@@ -218,15 +217,15 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
         if(selectedView.equals(SELECTED_INVENTORY)) {
             inventory.deleteItem(category, item);
-            updateListAddapter(inventory);
+            updateListAdapter(inventory);
         }
         if(selectedView.equals(SELECTED_SOLD)) {
             sold.deleteItem(category, item);
-            updateListAddapter(sold);
+            updateListAdapter(sold);
         }
         if(selectedView.equals(SELECTED_SHIPPED)) {
             shipped.deleteItem(category, item);
-            updateListAddapter(shipped);
+            updateListAdapter(shipped);
         }
     }
 
@@ -256,13 +255,13 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
             Item i = inventory.getItem(category, item);
             sold.addItem(item, category, i.getPrice(), quantity);
             i.setQuantity(i.getQuantity() - quantity);
-            updateListAddapter(inventory);
+            updateListAdapter(inventory);
         }
         if(selectedView.equals(SELECTED_SOLD)) {
             Item i = sold.getItem(category, item);
             shipped.addItem(item, category, i.getPrice(), quantity);
             i.setQuantity(i.getQuantity() - quantity);
-            updateListAddapter(sold);
+            updateListAdapter(sold);
         }
     }
 }
