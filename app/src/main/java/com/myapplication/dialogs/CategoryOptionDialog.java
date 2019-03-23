@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import com.myapplication.R;
 
@@ -17,7 +18,7 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
 
     public static final String TAG = "CategoryOptionDialog";
 
-    private EditText categoryName;
+    private AutoCompleteTextView categoryName;
     private String category;
     private CategoryMoreDialogListener listener;
 
