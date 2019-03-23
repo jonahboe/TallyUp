@@ -11,50 +11,43 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import com.myapplication.R;
 
-/**
- * This has
- */
-public class CategoryOptionDialog extends AppCompatDialogFragment {
+public class ItemOptionDialog extends AppCompatDialogFragment {
 
-    public static final String TAG = "CategoryOptionDialog";
+    public static final String TAG = "ItemOptionDialog";
 
-    private EditText categoryName;
-    private Button deleteCategoryButton;
+    private ItemDialogListener listener;
+    private EditText itemName;
+    private Button deleteItemButton;
     private String category;
-    private CategoryDialogListener listener;
+    private String item;
 
-    /**
-     * Sets the category to the param provided.
-     * @param category
-     */
     public void setCategory(String category) {
         this.category = category;
     }
+    public void setItem(String item) {
+        this.item = item;
+    }
 
-    /**
-     * this section has the code that deletes categorys.
-     * @param savedInstanceState
-     * @return
-     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.category_option_dialog,null);
+        View view = inflater.inflate(R.layout.item_option_dialog,null);
 
-        categoryName = view.findViewById(R.id.category_name);
-        categoryName.setText(category);
+        itemName = view.findViewById(R.id.item_name);
+        itemName.setText(category);
 
-        deleteCategoryButton = view.findViewById(R.id.delete_category_button);
-        deleteCategoryButton.setOnClickListener(new View.OnClickListener() {
+        deleteItemButton = view.findViewById(R.id.delete_item_button);
+        deleteItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder deleteDialog = new AlertDialog.Builder(getContext());
-                deleteDialog.setMessage("Are you sure you want to delete this category?");
-                deleteDialog.setTitle("Delete Category");
+                deleteDialog.setMessage("Are you sure you want to delete this item?");
+                deleteDialog.setTitle("Delete Item");
                 deleteDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -65,7 +58,7 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            listener.onDeleteCategory(category);
+                            listener.onDeleteItem(category, item);
                         } catch (Exception e) {
                             Log.e(TAG, e.getMessage());
                         }
@@ -78,7 +71,7 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
         });
 
         builder.setView(view)
-                .setTitle("Edit Category")
+                .setTitle("Edit Item")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -89,9 +82,9 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            String newName = categoryName.getText().toString();
+                            String newName = itemName.getText().toString();
                             if (category != newName)
-                                listener.onRenameCategory(category,newName);
+                                listener.onRenameItem(category,item,newName);
                         } catch (Exception e) {
                             Log.e(TAG, e.getMessage());
                         }
@@ -101,33 +94,21 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
         return builder.create();
     }
 
-    /**
-     * tries to use the context param to set the listener to "(CategoryMoreDialogListener) context"
-     * idk what that means though.
-     * @param context
-     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         try {
-            listener = (CategoryDialogListener) context;
+            listener = (ItemDialogListener) context;
         } catch (ClassCastException e) {
             Log.e(TAG, e.getMessage());
         }
     }
 
-<<<<<<< HEAD
-    /**
-     * A listener for our item adder
-     */
-    public interface CategoryMoreDialogListener {
-        void onDeleteCategory(String category);
-=======
     // An listener for our item adder
-    public interface CategoryDialogListener {
->>>>>>> a68a472e186997a2491e9a59ba183a50addf8e8a
-        void onRenameCategory(String oldName, String newName);
-        void onDeleteCategory(String category);
+    public interface ItemDialogListener {
+        void onRenameItem(String category, String oldName, String newName);
+        void onSellItem(String category, String item);
+        void onDeleteItem(String category, String item);
     }
 }
