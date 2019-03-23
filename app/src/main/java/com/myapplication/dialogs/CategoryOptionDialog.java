@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import com.myapplication.R;
 
@@ -18,7 +19,8 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
 
     public static final String TAG = "CategoryOptionDialog";
 
-    private AutoCompleteTextView categoryName;
+    private EditText categoryName;
+    private Button deleteCategoryButton;
     private String category;
     private CategoryMoreDialogListener listener;
 
@@ -28,7 +30,7 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.category_option_dialog,null);
@@ -36,9 +38,20 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
         categoryName = view.findViewById(R.id.category_name);
         categoryName.setText(category);
 
-        builder.setView(view)
-                .setTitle("Edit Item")
-                .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+        deleteCategoryButton = view.findViewById(R.id.delete_category_button);
+        deleteCategoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder deleteDialog = new AlertDialog.Builder(getContext());
+                deleteDialog.setMessage("Are you sure you want to delete this category?");
+                deleteDialog.setTitle("Delete Category");
+                deleteDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
+                    }
+                });
+                deleteDialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
@@ -46,9 +59,23 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
                         } catch (Exception e) {
                             Log.e(TAG, e.getMessage());
                         }
+                        dismiss();
+                    }
+                });
+                AlertDialog alertDialog = deleteDialog.create();
+                alertDialog.show();
+            }
+        });
+
+        builder.setView(view)
+                .setTitle("Edit Category")
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
                     }
                 })
-                .setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {

@@ -60,7 +60,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
                             price = parseFloat(editTextPrice.getText().toString());
                             quantity = parseInt(editTextQuantity.getText().toString());
                             Log.d("testing", item + ", " + category);
-                            if (item.matches("") || category.matches("")) {
+                            if (item.matches("") || category.matches("") || item.charAt(0) == ' ' || category.charAt(0) == ' ') {
                                 throw new Exception("Empty fields");
                             }
                             listener.onAddedItem(item, category, price, quantity);
