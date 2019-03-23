@@ -17,6 +17,9 @@ import com.myapplication.R;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
+/**
+ * This is the part where the user is able to add items and categories.
+ */
 public class AddItemDialog extends AppCompatDialogFragment {
 
     private static final String TAG = "AddItemDialog";
@@ -27,6 +30,11 @@ public class AddItemDialog extends AppCompatDialogFragment {
     private EditText editTextQuantity;
     private AddItemDialogListener listener;
 
+    /**
+     * uses the instance to add more onto the instance according to what the user types in
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -75,6 +83,11 @@ public class AddItemDialog extends AppCompatDialogFragment {
         return builder.create();
     }
 
+    /**
+     * sets listener = (AddItemDialogListener) context
+     * there is some more stuff but thats the important line I think.
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -86,7 +99,9 @@ public class AddItemDialog extends AppCompatDialogFragment {
         }
     }
 
-    // An listener for our item adder
+    /**
+     * A listener for our item adder
+     */
     public interface AddItemDialogListener {
         void onAddedItem(String item, String category, float price, int quantity);
     }

@@ -14,7 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.myapplication.R;
 
-
+/**
+ * This has
+ */
 public class CategoryOptionDialog extends AppCompatDialogFragment {
 
     public static final String TAG = "CategoryOptionDialog";
@@ -24,10 +26,19 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
     private String category;
     private CategoryMoreDialogListener listener;
 
+    /**
+     * Sets the category to the param provided.
+     * @param category
+     */
     public void setCategory(String category) {
         this.category = category;
     }
 
+    /**
+     * this section has the code that deletes categorys.
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -91,6 +102,11 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
         return builder.create();
     }
 
+    /**
+     * tries to use the context param to set the listener to "(CategoryMoreDialogListener) context"
+     * idk what that means though.
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -102,7 +118,9 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
         }
     }
 
-    // An listener for our item adder
+    /**
+     * A listener for our item adder
+     */
     public interface CategoryMoreDialogListener {
         void onDeleteCategory(String category);
         void onRenameCategory(String oldName, String newName);
