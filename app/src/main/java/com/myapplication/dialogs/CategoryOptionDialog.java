@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.myapplication.R;
 
+
 /**
  * This has
  */
@@ -23,7 +24,7 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
     private EditText categoryName;
     private Button deleteCategoryButton;
     private String category;
-    private CategoryDialogListener listener;
+    private CategoryOptionDialogListener listener;
 
     /**
      * Sets the category to the param provided.
@@ -111,7 +112,7 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
         super.onAttach(context);
 
         try {
-            listener = (CategoryDialogListener) context;
+            listener = (CategoryOptionDialogListener) context;
         } catch (ClassCastException e) {
             Log.e(TAG, e.getMessage());
         }
@@ -120,7 +121,7 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
     /**
      * A listener for our item adder
      */
-    public interface CategoryDialogListener {
+    public interface CategoryOptionDialogListener {
         void onRenameCategory(String oldName, String newName);
         void onDeleteCategory(String category);
     }

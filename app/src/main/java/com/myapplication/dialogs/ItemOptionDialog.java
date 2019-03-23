@@ -11,16 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.myapplication.R;
+
 
 public class ItemOptionDialog extends AppCompatDialogFragment {
 
     public static final String TAG = "ItemOptionDialog";
 
-    private ItemDialogListener listener;
+    private ItemOptionDialogListener listener;
     private EditText itemName;
     private Button deleteItemButton;
+    private Button sellItemButton;
     private String category;
     private String item;
 
@@ -39,7 +40,16 @@ public class ItemOptionDialog extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.item_option_dialog,null);
 
         itemName = view.findViewById(R.id.item_name);
-        itemName.setText(category);
+        itemName.setText(item);
+
+        sellItemButton = view.findViewById(R.id.move_item_button);
+        sellItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onMoveItemPressed(category, item);
+                dismiss();
+            }
+        });
 
         deleteItemButton = view.findViewById(R.id.delete_item_button);
         deleteItemButton.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +94,7 @@ public class ItemOptionDialog extends AppCompatDialogFragment {
                         try {
                             String newName = itemName.getText().toString();
                             if (category != newName)
-                                listener.onRenameItem(category,item,newName);
+                                listener.onRenameItem(category, item, newName);
                         } catch (Exception e) {
                             Log.e(TAG, e.getMessage());
                         }
@@ -99,16 +109,16 @@ public class ItemOptionDialog extends AppCompatDialogFragment {
         super.onAttach(context);
 
         try {
-            listener = (ItemDialogListener) context;
+            listener = (ItemOptionDialogListener) context;
         } catch (ClassCastException e) {
             Log.e(TAG, e.getMessage());
         }
     }
 
     // An listener for our item adder
-    public interface ItemDialogListener {
+    public interface ItemOptionDialogListener {
         void onRenameItem(String category, String oldName, String newName);
-        void onSellItem(String category, String item);
+        void onMoveItemPressed(String category, String item);
         void onDeleteItem(String category, String item);
     }
 }

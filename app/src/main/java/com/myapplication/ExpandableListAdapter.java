@@ -147,7 +147,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.itemPressed(childText, categoryText);
+                listener.onItemPressed(childText, categoryText);
             }
         });
 
@@ -163,7 +163,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     // An listener for our item adder
     public interface CategoryOptionsButtonListener {
         void onOptionButtonPressed(String infoCategory);
-        void itemPressed(String item, String category);
+        void onItemPressed(String item, String category);
     }
 
 }

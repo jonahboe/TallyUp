@@ -17,6 +17,7 @@ import com.myapplication.R;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
+
 /**
  * This is the part where the user is able to add items and categories.
  */

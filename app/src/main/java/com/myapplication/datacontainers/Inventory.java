@@ -94,15 +94,33 @@ public class Inventory {
     }
 
     /**
+     * Return the item object specified
+     * @param category
+     * @param item
+     * @return
+     */
+    public Item getItem(String category, String item) {
+        for (Category c : inventory) {
+            if (c.getName().equals(category)) {
+                for (Item i : c.getItems()) {
+                    if (i.getName().equals(item))
+                        return  i;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * This is actually adding the item for the app to see.
      * @param name the item.
-     * @param cat the category.
+     * @param category the category.
      * @param price the price of said item.
      * @param quantity the amount of that item you have.
      */
-    public void addItem(String name, String cat , float price, int quantity) {
+    public void addItem(String name, String category, float price, int quantity) {
         for (Category c : inventory) {
-            if (c.getName().equals(cat)) {
+            if (c.getName().equals(category)) {
                 for (Item i : c.getItems()) {
                     if (i.getName().equals(name)) {
                         i.setQuantity(i.getQuantity() + quantity);
@@ -113,17 +131,9 @@ public class Inventory {
                 return;
             }
         }
-        Category c = new Category(cat);
+        Category c = new Category(category);
         c.addItem(new Item(name,price,quantity));
         inventory.add(c);
-
-    }
-
-    /**
-     * The ability to remove the items.
-     */
-    public void removeItem() {
-
     }
 
     /**
@@ -132,13 +142,9 @@ public class Inventory {
      * @param newName
      */
     public void renameCategory(String oldName, String newName) {
-        ArrayList<Category> toRemove = new ArrayList<>();
         for (Category c : inventory) {
             if (c.getName().equals(oldName))
-                toRemove.add(c);
-        }
-        for (Category c : toRemove) {
-            c.setName(newName);
+                c.setName(newName);
         }
     }
 
@@ -154,6 +160,43 @@ public class Inventory {
         }
         for (Category c : toRemove) {
             inventory.remove(c);
+        }
+    }
+
+    /**
+     * Rename the items of the selected category and names to something else
+     * @param category
+     * @param oldName
+     * @param newName
+     */
+    public void renameItem(String category, String oldName, String newName) {
+        for (Category c : inventory) {
+            if (c.getName().equals(category)) {
+                for (Item i : c.getItems()) {
+                    if (i.getName().equals(oldName))
+                        i.setName(newName);
+                }
+            }
+        }
+    }
+
+    /**
+     * Delete an item from the specified category
+     * @param category
+     * @param item
+     */
+    public void deleteItem(String category, String item) {
+        for (Category c : inventory) {
+            if (c.getName().equals(category)) {
+                ArrayList<Item> toRemove = new ArrayList<>();
+                for (Item i : c.getItems()) {
+                    if (i.getName().equals(item))
+                        toRemove.add(i);
+                }
+                for (Item i : toRemove) {
+                    c.removeItem(i);
+                }
+            }
         }
     }
 
