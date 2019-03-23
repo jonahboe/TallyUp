@@ -117,8 +117,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         listHeader.setTypeface(null, Typeface.BOLD);
         listHeader.setText(headerTitle);
 
-        ImageButton button = view.findViewById(R.id.option_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        ImageButton optionButton = view.findViewById(R.id.option_button);
+        optionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onOptionButtonPressed(listHeader.getText().toString());
@@ -132,16 +132,24 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @SuppressLint("SetTextI18n")
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
         final String childText = (String)getChild(i,i1);
+        final String categoryText = (String)getGroup(i);
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_view_item,null);
         }
 
-        TextView txtListChild = view.findViewById(R.id.item_name);
+        final TextView txtListChild = view.findViewById(R.id.item_name);
         txtListChild.setText(childText);
 
         TextView itemQty = view.findViewById(R.id.item_quantity);
         itemQty.setText("Qty: " + Integer.toString(listItemQuantity.get(listDataCategory.get(i)).get(i1)));
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.itemPressed(childText, categoryText);
+            }
+        });
 
         view.setBackgroundResource(android.R.drawable.menuitem_background);
         return view;
@@ -155,6 +163,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     // An listener for our item adder
     public interface CategoryOptionsButtonListener {
         void onOptionButtonPressed(String infoCategory);
+        void itemPressed(String item, String category);
     }
 
 }

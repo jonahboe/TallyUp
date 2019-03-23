@@ -13,9 +13,11 @@ import android.widget.Toast;
 import com.myapplication.datacontainers.Inventory;
 import com.myapplication.dialogs.AddItemDialog;
 import com.myapplication.dialogs.CategoryOptionDialog;
+import com.myapplication.dialogs.ItemOptionDialog;
 
 public class MainActivity extends AppCompatActivity implements AddItemDialog.AddItemDialogListener,
-                                                               CategoryOptionDialog.CategoryMoreDialogListener,
+                                                               CategoryOptionDialog.CategoryDialogListener,
+                                                               ItemOptionDialog.ItemDialogListener,
                                                                ExpandableListAdapter.CategoryOptionsButtonListener {
 
     private ExpandableListView listView;
@@ -138,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     public void onOptionButtonPressed(String category) {
         CategoryOptionDialog dialog = new CategoryOptionDialog();
         dialog.setCategory(category);
-        dialog.show(getSupportFragmentManager(),"categoryMoreDialog");
+        dialog.show(getSupportFragmentManager(),"categoryInfoDialog");
     }
 
     @Override
@@ -163,5 +165,28 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
             listAdapter.setDataItemQuantity(inventory.getItemsQuantityMap());
             listAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void itemPressed(String item, String category) {
+        ItemOptionDialog dialog = new ItemOptionDialog();
+        dialog.setItem(item);
+        dialog.setCategory(category);
+        dialog.show(getSupportFragmentManager(),"itemInfoDialog");
+    }
+
+    @Override
+    public void onRenameItem(String category, String oldName, String newName) {
+
+    }
+
+    @Override
+    public void onSellItem(String category, String item) {
+
+    }
+
+    @Override
+    public void onDeleteItem(String category, String item) {
+
     }
 }
