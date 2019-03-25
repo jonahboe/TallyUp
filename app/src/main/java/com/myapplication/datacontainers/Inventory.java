@@ -8,6 +8,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
@@ -38,6 +40,21 @@ public class Inventory {
      */
     public void setInventory(List<Category> categories) {
         this.inventory = categories;
+    }
+
+
+
+    public void sortItems() {
+        Collections.sort(inventory, new Comparator<Category>() {
+            @Override
+            public int compare(Category o1, Category o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
+        for (Category c : inventory) {
+            c.sortItems();
+        }
     }
 
     /**

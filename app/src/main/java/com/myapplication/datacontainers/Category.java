@@ -1,6 +1,8 @@
 package com.myapplication.datacontainers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A category which holds one set of items for an inventory to draw from.
@@ -10,6 +12,14 @@ public class Category {
     private String name;
     private ArrayList<Item> items = new ArrayList<>();
 
+    public void sortItems() {
+        Collections.sort(items, new Comparator<Item>() {
+            @Override
+            public int compare(Item o1, Item o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+    }
     /**
      * Creates a category with the name that is passed into it.
      * @param name The name of the category.
@@ -65,4 +75,6 @@ public class Category {
     public void removeItem(Item i) {
         items.remove(i);
     }
+
+
 }
