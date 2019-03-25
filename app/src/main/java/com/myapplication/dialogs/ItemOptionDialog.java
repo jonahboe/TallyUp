@@ -50,13 +50,17 @@ public class ItemOptionDialog extends AppCompatDialogFragment {
         itemName.setText(item);
 
         sellItemButton = view.findViewById(R.id.move_item_button);
-        sellItemButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onMoveItemPressed(category, item);
-                dismiss();
-            }
-        });
+        if (MainActivity.selectedView.equals(MainActivity.SELECTED_SHIPPED))
+            sellItemButton.setVisibility(View.GONE);
+        else {
+            sellItemButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onMoveItemPressed(category, item);
+                    dismiss();
+                }
+            });
+        }
 
         deleteItemButton = view.findViewById(R.id.delete_item_button);
         deleteItemButton.setOnClickListener(new View.OnClickListener() {
