@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.myapplication.MainActivity;
 import com.myapplication.R;
 
 
@@ -38,6 +40,11 @@ public class ItemOptionDialog extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.item_option_dialog,null);
+
+        Button moveItem = view.findViewById(R.id.move_item_button);
+        if (MainActivity.selectedView.equals(MainActivity.SELECTED_SOLD)) {
+            moveItem.setText("SHIP ITEM");
+        }
 
         itemName = view.findViewById(R.id.item_name);
         itemName.setText(item);

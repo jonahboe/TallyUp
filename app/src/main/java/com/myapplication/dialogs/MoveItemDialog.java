@@ -10,7 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.NumberPicker;
+
+import com.myapplication.MainActivity;
 import com.myapplication.R;
+
 
 
 /**
@@ -25,6 +28,7 @@ public class MoveItemDialog extends AppCompatDialogFragment {
     private String item;
     private NumberPicker quantitySpinner;
     private MoveItemDialogListener listener;
+    private String functionality = "Sell";
 
     public void setMaxQuantity(int maxQuantity) {
         this.maxQuantity = maxQuantity;
@@ -45,20 +49,24 @@ public class MoveItemDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.move_item_dialog,null);
 
+        if(MainActivity.selectedView.equals(MainActivity.SELECTED_SOLD)) {
+            functionality = "Ship";
+        }
+
         quantitySpinner = view.findViewById(R.id.spinner);
         quantitySpinner.setMinValue(1);
         quantitySpinner.setMaxValue(maxQuantity);
         quantitySpinner.setWrapSelectorWheel(false);
 
         builder.setView(view)
-                .setTitle("Sell Item")
+                .setTitle(functionality + " Item")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing
                     }
                 })
-                .setPositiveButton("Sell", new DialogInterface.OnClickListener() {
+                .setPositiveButton(functionality, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         listener.onMoveItem(category, item, quantitySpinner.getValue());

@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     public static final String SELECTED_SOLD = "com.myapplication.MainActivity.SELECTED_SOLD";
     public static final String SELECTED_SHIPPED = "com.myapplication.MainActivity.SELECTED_SHIPPED";
 
+    public static String selectedView = SELECTED_INVENTORY;
     private ExpandableListView listView;
     private ExpandableListAdapter listAdapter;
-    private static String selectedView = SELECTED_INVENTORY;
     private static Inventory inventory;
     private static Inventory sold;
     private static Inventory shipped;
@@ -57,14 +57,14 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
                     listAdapter.setDataItem(sold.getItemsMap());
                     listAdapter.setDataItemQuantity(sold.getItemsQuantityMap());
                     listAdapter.notifyDataSetChanged();
-                    selectedView = SELECTED_SHIPPED;
+                    selectedView = SELECTED_SOLD;
                     return true;
                 case R.id.navigation_shipped:
                     listAdapter.setDataCategory(shipped.getCategoriesList());
                     listAdapter.setDataItem(shipped.getItemsMap());
                     listAdapter.setDataItemQuantity(shipped.getItemsQuantityMap());
                     listAdapter.notifyDataSetChanged();
-                    selectedView = SELECTED_SOLD;
+                    selectedView = SELECTED_SHIPPED;
                     return true;
             }
             return false;
