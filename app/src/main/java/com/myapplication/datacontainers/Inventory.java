@@ -129,6 +129,19 @@ public class Inventory {
     }
 
     /**
+     *
+     * @param name
+     * @return
+     */
+    public Category getCategory(String name) {
+        for (Category c : inventory) {
+            if (c.getName().equals(name))
+                return c;
+        }
+        return null;
+    }
+
+    /**
      * This is actually adding the item for the app to see.
      * @param name the item.
      * @param category the category.
@@ -159,9 +172,24 @@ public class Inventory {
      * @param newName
      */
     public void renameCategory(String oldName, String newName) {
+        String toDelete = null;
         for (Category c : inventory) {
-            if (c.getName().equals(oldName))
-                c.setName(newName);
+            if (c.getName().equals(newName)) {
+                toDelete = oldName;
+                for (Item i : this.getCategory(oldName).getItems())
+                    c.addItem(i);
+            }
+        }
+        if (toDelete != null) {
+            this.deleteCategory(oldName);
+            return;
+        }
+
+        else {
+            for (Category c : inventory) {
+                if (c.getName().equals(oldName))
+                    c.setName(newName);
+            }
         }
     }
 

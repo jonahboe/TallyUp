@@ -62,10 +62,17 @@ public class Category {
 
     /**
      * Items can be added to the list.
-     * @param i passing in the item that will be added.
+     * @param temp passing in the item that will be added.
      */
-    public void addItem(Item i) {
-        items.add(i);
+    public void addItem(Item temp) {
+
+        for (Item i : items) {
+            if (temp.getName().equals(i.getName())) {
+                i.setQuantity(i.getQuantity() + temp.getQuantity());
+                return;
+            }
+        }
+        items.add(temp);
     }
 
     /**
