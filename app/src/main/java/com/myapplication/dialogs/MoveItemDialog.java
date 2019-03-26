@@ -49,9 +49,14 @@ public class MoveItemDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.move_item_dialog,null);
 
+        if(MainActivity.selectedView.equals(MainActivity.SELECTED_INVENTORY)) {
+            functionality = "Sell";
+        }
+
         if(MainActivity.selectedView.equals(MainActivity.SELECTED_SOLD)) {
             functionality = "Ship";
         }
+
 
         quantitySpinner = view.findViewById(R.id.spinner);
         quantitySpinner.setMinValue(0);
