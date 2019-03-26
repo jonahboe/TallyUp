@@ -16,6 +16,8 @@ import com.myapplication.dialogs.CategoryOptionDialog;
 import com.myapplication.dialogs.ItemOptionDialog;
 import com.myapplication.dialogs.MoveItemDialog;
 
+import static java.security.AccessController.getContext;
+
 public class MainActivity extends AppCompatActivity implements AddItemDialog.AddItemDialogListener,
         CategoryOptionDialog.CategoryOptionDialogListener,
         ItemOptionDialog.ItemOptionDialogListener,
@@ -173,7 +175,10 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
     @Override
     public void onRenameCategory(String oldName, String newName) {
-
+        if(newName.matches("") || newName.charAt(0) == ' ') {
+            new Toast(this).makeText(this,"Error: Please fill out the field",Toast.LENGTH_LONG).show();
+            return;
+        }
         if(selectedView.equals(SELECTED_INVENTORY)) {
             inventory.renameCategory(oldName, newName);
             updateListAdapter(inventory);
@@ -198,6 +203,10 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
     @Override
     public void onRenameItem(String category, String oldName, String newName) {
+        if(newName.matches("") || category.matches("") || newName.charAt(0) == ' ' || category.charAt(0) == ' ') {
+            new Toast(this).makeText(this,"Error: Please fill out the field",Toast.LENGTH_LONG).show();
+            return;
+        }
 
         if(selectedView.equals(SELECTED_INVENTORY)) {
             inventory.renameItem(category, oldName, newName);
