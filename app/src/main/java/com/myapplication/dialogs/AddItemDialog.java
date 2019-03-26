@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.myapplication.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
@@ -35,7 +36,20 @@ public class AddItemDialog extends AppCompatDialogFragment {
     private EditText editTextQuantity;
     private AddItemDialogListener listener;
 
-    private ArrayList<String> itemPromptList;
+    private List<String> itemPromptList;
+    private List<String> categoryPromptList;
+
+    /**
+     *
+     * @param itemPromptList
+     */
+    public void setItemPrompts(List<String> itemPromptList) {
+        this.itemPromptList = itemPromptList;
+    }
+
+    public void setCategoryPromptList(List<String> categoryPromptList) {
+        this.categoryPromptList = categoryPromptList;
+    }
 
     /**
      * uses the instance to add more onto the instance according to what the user types in
@@ -51,11 +65,14 @@ public class AddItemDialog extends AppCompatDialogFragment {
 
         editTextItem = view.findViewById(R.id.itemText);
         ArrayAdapter itemAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, itemPromptList);
-        editTextItem.setAdapter(itemAdapter);
         editTextItem.setThreshold(1);
         editTextItem.setAdapter(itemAdapter);
 
         editTextCategory = view.findViewById(R.id.categoryText);
+        ArrayAdapter categoryAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, categoryPromptList);
+        editTextCategory.setThreshold(1);
+        editTextCategory.setAdapter(categoryAdapter);
+
         editTextPrice = view.findViewById(R.id.priceText);
         editTextQuantity = view.findViewById(R.id.quantityText);
 

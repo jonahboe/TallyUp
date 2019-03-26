@@ -54,7 +54,7 @@ public class MoveItemDialog extends AppCompatDialogFragment {
         }
 
         quantitySpinner = view.findViewById(R.id.spinner);
-        quantitySpinner.setMinValue(1);
+        quantitySpinner.setMinValue(0);
         quantitySpinner.setMaxValue(maxQuantity);
         quantitySpinner.setWrapSelectorWheel(false);
 

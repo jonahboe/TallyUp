@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
@@ -15,6 +16,10 @@ import com.myapplication.dialogs.AddItemDialog;
 import com.myapplication.dialogs.CategoryOptionDialog;
 import com.myapplication.dialogs.ItemOptionDialog;
 import com.myapplication.dialogs.MoveItemDialog;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 import static java.security.AccessController.getContext;
 
@@ -129,6 +134,14 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         // Check if it was the add button that was pressed
         if (id == R.id.add_item_button) {
             AddItemDialog addItemDialog = new AddItemDialog();
+
+            ArrayList<String> itemPrompt = new ArrayList<>();
+            for (Map.Entry i : inventory.getItemsMap().entrySet()) {
+                itemPrompt.addAll((ArrayList) i.getValue());
+            }
+            addItemDialog.setItemPrompts(itemPrompt);
+            addItemDialog.setCategoryPromptList(inventory.getCategoriesList());
+
             addItemDialog.show(getSupportFragmentManager(),"addItemDialog");
             return true;
         }
