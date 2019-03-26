@@ -173,6 +173,7 @@ public class Inventory {
      */
     public void renameCategory(String oldName, String newName) {
         String toDelete = null;
+        // If there is an overlap with another category
         for (Category c : inventory) {
             if (c.getName().equals(newName)) {
                 toDelete = oldName;
@@ -184,7 +185,7 @@ public class Inventory {
             this.deleteCategory(oldName);
             return;
         }
-
+        // If there isn't an overlap
         else {
             for (Category c : inventory) {
                 if (c.getName().equals(oldName))
@@ -215,12 +216,25 @@ public class Inventory {
      * @param newName
      */
     public void renameItem(String category, String oldName, String newName) {
-        for (Category c : inventory) {
-            if (c.getName().equals(category)) {
-                for (Item i : c.getItems()) {
-                    if (i.getName().equals(oldName))
-                        i.setName(newName);
-                }
+        Category c = getCategory(category);
+        String toDelete = null;
+        // If there is an overlap with another item
+        for (Item i : c.getItems()) {
+            if (i.getName().equals(newName)) {
+                Item temp = this.getItem(category, oldName);
+                i.setQuantity(i.getQuantity() + temp.getQuantity());
+                toDelete = oldName;
+            }
+        }
+        if (toDelete != null) {
+            this.deleteItem(category, oldName);
+            return;
+        }
+        // If there isn't an overlap then just add it
+        else {
+            for (Item i : c.getItems()) {
+                if (i.getName().equals(oldName))
+                    i.setName(newName);
             }
         }
     }
