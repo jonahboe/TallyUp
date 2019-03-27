@@ -20,6 +20,7 @@ public class Category {
             }
         });
     }
+
     /**
      * Creates a category with the name that is passed into it.
      * @param name The name of the category.

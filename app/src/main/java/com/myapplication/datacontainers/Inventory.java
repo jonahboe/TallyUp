@@ -43,7 +43,9 @@ public class Inventory {
     }
 
 
-
+    /**
+     * Sorts our items alphabetically!
+     */
     public void sortItems() {
         Collections.sort(inventory, new Comparator<Category>() {
             @Override
@@ -112,8 +114,8 @@ public class Inventory {
 
     /**
      * Return the item object specified
-     * @param category
-     * @param item
+     * @param category the category it goes through
+     * @param item the item that will be retrieved
      * @return
      */
     public Item getItem(String category, String item) {
@@ -167,8 +169,8 @@ public class Inventory {
 
     /**
      * Change the name of a category
-     * @param oldName
-     * @param newName
+     * @param oldName the old name that will be replaced
+     * @param newName the new name the replaces old name
      */
     public void renameCategory(String oldName, String newName) {
         String toDelete = null;
@@ -240,8 +242,8 @@ public class Inventory {
 
     /**
      * Delete an item from the specified category
-     * @param category
-     * @param item
+     * @param category is the category it deletes from
+     * @param item is the item it deletes
      */
     public void deleteItem(String category, String item) {
         for (Category c : inventory) {
