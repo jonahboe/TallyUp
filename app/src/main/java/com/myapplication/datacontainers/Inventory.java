@@ -175,7 +175,7 @@ public class Inventory {
         String toDelete = null;
         // If there is an overlap with another category
         for (Category c : inventory) {
-            if (c.getName().equals(newName)) {
+            if (c.getName().equals(newName) && c != getCategory(oldName)) {
                 toDelete = oldName;
                 for (Item i : this.getCategory(oldName).getItems())
                     c.addItem(i);
@@ -220,7 +220,7 @@ public class Inventory {
         String toDelete = null;
         // If there is an overlap with another item
         for (Item i : c.getItems()) {
-            if (i.getName().equals(newName)) {
+            if (i.getName().equals(newName) && i != getItem(category, oldName)) {
                 Item temp = this.getItem(category, oldName);
                 i.setQuantity(i.getQuantity() + temp.getQuantity());
                 toDelete = oldName;
