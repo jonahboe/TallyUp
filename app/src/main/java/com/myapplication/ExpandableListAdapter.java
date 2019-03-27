@@ -47,65 +47,132 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
     }
 
+    /**
+     * Gets the category data, the title of the category
+     * @return the category data
+     */
     public List<String> getDataCategory() {
         return listDataCategory;
     }
 
+    /**
+     * Allows us to set the data header, which is the category title
+     * @param listDataHeader the header from before
+     */
     public void setDataCategory(List<String> listDataHeader) {
         this.listDataCategory = listDataHeader;
     }
 
+    /**
+     * A hash map for getting the item in the data
+     * @return returns the item data
+     */
     public HashMap<String, List<String>> getDataItem() {
         return listDataItem;
     }
 
+    /**
+     * Sets the item ehader, which are the items
+     * @param listHashMap the header from before
+     */
     public void setDataItem(HashMap<String, List<String>> listHashMap) {
         this.listDataItem = listHashMap;
     }
 
+    /**
+     * How many of a particular item we have
+     * @return gets the quantity of how many we have
+     */
     public HashMap<String, List<Integer>> getDataItemQuantity() {
         return listItemQuantity;
     }
 
+    /**
+     * Sets the quantity of the particular item
+     * @param listItemQuantity the quantity from before
+     */
     public void setDataItemQuantity(HashMap<String, List<Integer>> listItemQuantity) {
         this.listItemQuantity = listItemQuantity;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getGroupCount() {
         return listDataCategory.size();
     }
 
+    /**
+     *
+     * @param i
+     * @return
+     */
     @Override
     public int getChildrenCount(int i) {
         return listDataItem.get(listDataCategory.get(i)).size();
     }
 
+    /**
+     *
+     * @param i
+     * @return
+     */
     @Override
     public Object getGroup(int i) {
         return listDataCategory.get(i);
     }
 
+    /**
+     *
+     * @param i
+     * @param i1
+     * @return
+     */
     @Override
     public Object getChild(int i, int i1) {
         return listDataItem.get(listDataCategory.get(i)).get(i1);
     }
 
+    /**
+     *
+     * @param i
+     * @return
+     */
     @Override
     public long getGroupId(int i) {
         return i;
     }
 
+    /**
+     *
+     * @param i
+     * @param i1
+     * @return
+     */
     @Override
     public long getChildId(int i, int i1) {
         return i1;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean hasStableIds() {
         return false;
     }
 
+    /**
+     *
+     * @param i
+     * @param b
+     * @param view
+     * @param viewGroup
+     * @return
+     */
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
         String headerTitle = (String)getGroup(i);
@@ -128,6 +195,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return view;
     }
 
+    /**
+     *
+     * @param i
+     * @param i1
+     * @param b
+     * @param view
+     * @param viewGroup
+     * @return
+     */
     @Override
     @SuppressLint("SetTextI18n")
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
@@ -155,12 +231,20 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return view;
     }
 
+    /**
+     *
+     * @param i
+     * @param i1
+     * @return
+     */
     @Override
     public boolean isChildSelectable(int i, int i1) {
         return true;
     }
 
-    // An listener for our item adder
+    /**
+     *
+     */
     public interface CategoryOptionsButtonListener {
         void onOptionButtonPressed(String infoCategory);
         void onItemPressed(String item, String category);
