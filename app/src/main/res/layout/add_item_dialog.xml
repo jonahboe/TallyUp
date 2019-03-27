@@ -20,19 +20,10 @@
         android:hint="@string/add_dialog_category" />
 
     <EditText
-        android:id="@+id/priceText"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/categoryText"
-        android:layout_marginTop="16dp"
-        android:hint="@string/add_dialog_price"
-        android:inputType="numberDecimal" />
-
-    <EditText
         android:id="@+id/quantityText"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/priceText"
+        android:layout_below="@+id/categoryText"
         android:layout_marginTop="16dp"
         android:hint="@string/add_dialog_quantity"
         android:inputType="number" />

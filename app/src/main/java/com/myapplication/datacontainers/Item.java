@@ -6,18 +6,15 @@ package com.myapplication.datacontainers;
 public class Item {
 
     String name;
-    float price;
     int quantity;
 
     /**
      * What does an item have?
      * @param name It's name.
-     * @param price It's price.
      * @param quantity How many?
      */
-    public Item(String name, float price, int quantity) {
+    public Item(String name, int quantity) {
         this.name = name;
-        this.price = price;
         this.quantity = quantity;
     }
 
@@ -35,22 +32,6 @@ public class Item {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * Able to get the price.
-     * @return price of item.
-     */
-    public float getPrice() {
-        return price;
-    }
-
-    /**
-     * Able to set the price.
-     * @param price is the price that is to be set for the item.
-     */
-    public void setPrice(float price) {
-        this.price = price;
     }
 
     /**

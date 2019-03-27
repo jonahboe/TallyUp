@@ -32,7 +32,6 @@ public class AddItemDialog extends AppCompatDialogFragment {
 
     private AutoCompleteTextView editTextItem;
     private AutoCompleteTextView editTextCategory;
-    private EditText editTextPrice;
     private EditText editTextQuantity;
     private AddItemDialogListener listener;
 
@@ -73,7 +72,6 @@ public class AddItemDialog extends AppCompatDialogFragment {
         editTextCategory.setThreshold(1);
         editTextCategory.setAdapter(categoryAdapter);
 
-        editTextPrice = view.findViewById(R.id.priceText);
         editTextQuantity = view.findViewById(R.id.quantityText);
 
         builder.setView(view)
@@ -94,13 +92,12 @@ public class AddItemDialog extends AppCompatDialogFragment {
                         try {
                             item = editTextItem.getText().toString();
                             category = editTextCategory.getText().toString();
-                            price = parseFloat(editTextPrice.getText().toString());
                             quantity = parseInt(editTextQuantity.getText().toString());
                             Log.d("testing", item + ", " + category);
                             if (item.matches("") || category.matches("") || item.charAt(0) == ' ' || category.charAt(0) == ' ') {
                                 throw new Exception("Empty fields");
                             }
-                            listener.onAddedItem(item, category, price, quantity);
+                            listener.onAddedItem(item, category, quantity);
                         } catch (Exception e) {
                             new Toast(getContext()).makeText(getContext(),R.string.add_item_error,Toast.LENGTH_LONG).show();
                             Log.e(TAG, e.getMessage());
@@ -132,7 +129,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
      * A listener for our item adder
      */
     public interface AddItemDialogListener {
-        void onAddedItem(String item, String category, float price, int quantity);
+        void onAddedItem(String item, String category, int quantity);
     }
 
 }

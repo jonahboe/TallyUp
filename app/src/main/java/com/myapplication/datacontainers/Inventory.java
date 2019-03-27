@@ -145,10 +145,9 @@ public class Inventory {
      * This is actually adding the item for the app to see.
      * @param name the item.
      * @param category the category.
-     * @param price the price of said item.
      * @param quantity the amount of that item you have.
      */
-    public void addItem(String name, String category, float price, int quantity) {
+    public void addItem(String name, String category, int quantity) {
         for (Category c : inventory) {
             if (c.getName().equals(category)) {
                 for (Item i : c.getItems()) {
@@ -157,12 +156,12 @@ public class Inventory {
                         return;
                     }
                 }
-                c.addItem(new Item(name,price,quantity));
+                c.addItem(new Item(name,quantity));
                 return;
             }
         }
         Category c = new Category(category);
-        c.addItem(new Item(name,price,quantity));
+        c.addItem(new Item(name,quantity));
         inventory.add(c);
     }
 

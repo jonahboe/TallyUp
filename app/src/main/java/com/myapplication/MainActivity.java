@@ -150,9 +150,9 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     }
 
     @Override
-    public void onAddedItem(String item, String category, float price, int quantity) {
+    public void onAddedItem(String item, String category, int quantity) {
 
-        inventory.addItem(item,category,price,quantity);
+        inventory.addItem(item,category,quantity);
         inventory.sortItems();
 
         if(selectedView.equals(SELECTED_INVENTORY)) {
@@ -276,14 +276,14 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
 
         if(selectedView.equals(SELECTED_INVENTORY)) {
             Item i = inventory.getItem(category, item);
-            sold.addItem(item, category, i.getPrice(), quantity);
+            sold.addItem(item, category, quantity);
             i.setQuantity(i.getQuantity() - quantity);
             sold.sortItems();
             updateListAdapter(inventory);
         }
         if(selectedView.equals(SELECTED_SOLD)) {
             Item i = sold.getItem(category, item);
-            shipped.addItem(item, category, i.getPrice(), quantity);
+            shipped.addItem(item, category, quantity);
             i.setQuantity(i.getQuantity() - quantity);
             shipped.sortItems();
             updateListAdapter(sold);
