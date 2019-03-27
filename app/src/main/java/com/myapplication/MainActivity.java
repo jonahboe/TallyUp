@@ -285,6 +285,8 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
             Item i = sold.getItem(category, item);
             shipped.addItem(item, category, quantity);
             i.setQuantity(i.getQuantity() - quantity);
+            if (i.getQuantity() == 0)
+                sold.deleteItem(category, item);
             shipped.sortItems();
             updateListAdapter(sold);
         }
