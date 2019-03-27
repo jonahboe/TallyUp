@@ -28,7 +28,7 @@ public class MoveItemDialog extends AppCompatDialogFragment {
     private String item;
     private NumberPicker quantitySpinner;
     private MoveItemDialogListener listener;
-    private String functionality = "Sell";
+    private String functionality;
 
     public void setMaxQuantity(int maxQuantity) {
         this.maxQuantity = maxQuantity;
