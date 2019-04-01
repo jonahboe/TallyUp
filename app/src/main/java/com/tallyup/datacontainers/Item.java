@@ -1,4 +1,4 @@
-package com.myapplication.datacontainers;
+package com.tallyup.datacontainers;
 
 /**
  * One item within a category of inventory. Though it is one item, it can have a varying quantity.

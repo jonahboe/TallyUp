@@ -1,4 +1,4 @@
-package com.myapplication.datacontainers;
+package com.tallyup.datacontainers;
 
 import java.util.ArrayList;
 import java.util.Collections;

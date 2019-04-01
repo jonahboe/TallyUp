@@ -1,4 +1,4 @@
-package com.myapplication;
+package com.tallyup;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

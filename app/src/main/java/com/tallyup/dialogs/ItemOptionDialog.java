@@ -1,4 +1,4 @@
-package com.myapplication.dialogs;
+package com.tallyup.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.myapplication.MainActivity;
-import com.myapplication.R;
+import com.tallyup.MainActivity;
+import com.tallyup.R;
 
 /**
  * This builds the display for the options of what to do when the item is clicked.

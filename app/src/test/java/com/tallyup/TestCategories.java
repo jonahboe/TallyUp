@@ -1,7 +1,7 @@
-package com.myapplication;
+package com.tallyup;
 
-import com.myapplication.datacontainers.Category;
-import com.myapplication.datacontainers.Item;
+import com.tallyup.datacontainers.Category;
+import com.tallyup.datacontainers.Item;
 
 import org.junit.Test;
 
