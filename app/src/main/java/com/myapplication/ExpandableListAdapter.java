@@ -31,8 +31,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
      * parameters. It also sets an more button listener for each of the categories.
      * @param context The context of the view.
      * @param listDataCategory The header holds a list of strings (the categories).
-     * @param listDataItem The hash holds the individual items, the keys being the categories in the listDataCategory
-     * @param listItemQuantity A hash holding the quantities of each item, the keys are in listDataCategory
+     * @param listDataItem The hash holds the individual items, the keys being the categories in the listDataCategory.
+     * @param listItemQuantity A hash holding the quantities of each item, the keys are in listDataCategory.
      */
     public ExpandableListAdapter(Context context, List<String> listDataCategory, HashMap<String, List<String>> listDataItem, HashMap<String, List<Integer>> listItemQuantity) {
         this.context = context;
@@ -48,56 +48,56 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     * Gets the category data, the title of the category
-     * @return the category data
+     * Gets the category data, the title of the category.
+     * @return the category data.
      */
     public List<String> getDataCategory() {
         return listDataCategory;
     }
 
     /**
-     * Allows us to set the data header, which is the category title
-     * @param listDataHeader the header from before
+     * Allows us to set the data header, which is the category title.
+     * @param listDataHeader the header from before.
      */
     public void setDataCategory(List<String> listDataHeader) {
         this.listDataCategory = listDataHeader;
     }
 
     /**
-     * A hash map for getting the item in the data
-     * @return returns the item data
+     * A hash map for getting the item in the data.
+     * @return returns the item data.
      */
     public HashMap<String, List<String>> getDataItem() {
         return listDataItem;
     }
 
     /**
-     * Sets the item ehader, which are the items
-     * @param listHashMap the header from before
+     * Sets the item ehader, which are the items.
+     * @param listHashMap the header from before.
      */
     public void setDataItem(HashMap<String, List<String>> listHashMap) {
         this.listDataItem = listHashMap;
     }
 
     /**
-     * How many of a particular item we have
-     * @return gets the quantity of how many we have
+     * How many of a particular item we have.
+     * @return gets the quantity of how many we have.
      */
     public HashMap<String, List<Integer>> getDataItemQuantity() {
         return listItemQuantity;
     }
 
     /**
-     * Sets the quantity of the particular item
-     * @param listItemQuantity the quantity from before
+     * Sets the quantity of the particular item.
+     * @param listItemQuantity the quantity from before.
      */
     public void setDataItemQuantity(HashMap<String, List<Integer>> listItemQuantity) {
         this.listItemQuantity = listItemQuantity;
     }
 
     /**
-     *
-     * @return
+     * How many categories there are in that inventory.
+     * @return an integer of the quantity.
      */
     @Override
     public int getGroupCount() {
@@ -105,9 +105,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     *
-     * @param i
-     * @return
+     * Get however many items are in the specific category.
+     * @param i index of the category.
+     * @return an integer of the quantity.
      */
     @Override
     public int getChildrenCount(int i) {
@@ -115,9 +115,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     *
-     * @param i
-     * @return
+     * Gets the name of a specific category.
+     * @param i takes the index.
+     * @return a string of the name of the category.
      */
     @Override
     public Object getGroup(int i) {
@@ -125,10 +125,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     *
-     * @param i
-     * @param i1
-     * @return
+     * Gets the name of the item.
+     * @param i Index of category.
+     * @param i1 Index of the item.
+     * @return the name of the child of a specified category as a string.
      */
     @Override
     public Object getChild(int i, int i1) {
@@ -136,9 +136,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     *
-     * @param i
-     * @return
+     * Gets the group id using an Index.
+     * @param i index of the category.
+     * @return Index i.
      */
     @Override
     public long getGroupId(int i) {
@@ -146,10 +146,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     *
-     * @param i
-     * @param i1
-     * @return
+     * Gets the item id using an Index.
+     * @param i index of the category.
+     * @param i1 index of the item.
+     * @return the item.
      */
     @Override
     public long getChildId(int i, int i1) {
@@ -157,8 +157,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     *
-     * @return
+     * Items id's aren't modified on item added.
+     * @return false.
      */
     @Override
     public boolean hasStableIds() {
@@ -166,12 +166,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     *
-     * @param i
-     * @param b
-     * @param view
-     * @param viewGroup
-     * @return
+     * Inflates a new view for a category, and gets the individual category view.
+     * @param i index of the category.
+     * @param b not used.
+     * @param view the view to build into.
+     * @param viewGroup not used.
+     * @return an individual category view
      */
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
@@ -196,13 +196,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     *
-     * @param i
-     * @param i1
-     * @param b
-     * @param view
-     * @param viewGroup
-     * @return
+     * Inflates a new view for a item, and gets the individual item view.
+     * @param i index of the category.
+     * @param i1 index of the item.
+     * @param b not used.
+     * @param view the view to build into.
+     * @param viewGroup not used.
+     * @return an individual item view.
      */
     @Override
     @SuppressLint("SetTextI18n")
@@ -232,10 +232,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     *
-     * @param i
-     * @param i1
-     * @return
+     * Can you click the item?
+     * @param i the category index.
+     * @param i1 the item index.
+     * @return if the child is clickable.
      */
     @Override
     public boolean isChildSelectable(int i, int i1) {
@@ -243,7 +243,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     *
+     * The interface to be overwritten allowing an activity to receive information
+     * about user activity.
      */
     public interface CategoryOptionsButtonListener {
         void onOptionButtonPressed(String infoCategory);
