@@ -1,4 +1,4 @@
-package com.myapplication;
+package com.tallyup;
 
 import org.junit.Test;
 

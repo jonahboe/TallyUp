@@ -1,4 +1,4 @@
-package com.myapplication;
+package com.tallyup;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.tallyup.R;
 
 import java.util.HashMap;
 import java.util.List;

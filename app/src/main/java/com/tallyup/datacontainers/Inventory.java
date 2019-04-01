@@ -1,4 +1,4 @@
-package com.myapplication.datacontainers;
+package com.tallyup.datacontainers;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

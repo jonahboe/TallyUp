@@ -1,4 +1,4 @@
-package com.myapplication.dialogs;
+package com.tallyup.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,9 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.NumberPicker;
 
-import com.myapplication.MainActivity;
-import com.myapplication.R;
-
+import com.tallyup.MainActivity;
+import com.tallyup.R;
 
 
 /**

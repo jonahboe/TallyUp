@@ -1,27 +1,24 @@
-package com.myapplication;
+package com.tallyup;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.myapplication.datacontainers.Inventory;
-import com.myapplication.datacontainers.Item;
-import com.myapplication.dialogs.AddItemDialog;
-import com.myapplication.dialogs.CategoryOptionDialog;
-import com.myapplication.dialogs.ItemOptionDialog;
-import com.myapplication.dialogs.MoveItemDialog;
+import com.tallyup.R;
+import com.tallyup.datacontainers.Inventory;
+import com.tallyup.datacontainers.Item;
+import com.tallyup.dialogs.AddItemDialog;
+import com.tallyup.dialogs.CategoryOptionDialog;
+import com.tallyup.dialogs.ItemOptionDialog;
+import com.tallyup.dialogs.MoveItemDialog;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
-
-import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity implements AddItemDialog.AddItemDialogListener,
         CategoryOptionDialog.CategoryOptionDialogListener,
@@ -29,9 +26,9 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         MoveItemDialog.MoveItemDialogListener,
         ExpandableListAdapter.CategoryOptionsButtonListener {
 
-    public static final String SELECTED_INVENTORY = "com.myapplication.MainActivity.SELECTED_INVENTORY";
-    public static final String SELECTED_SOLD = "com.myapplication.MainActivity.SELECTED_SOLD";
-    public static final String SELECTED_SHIPPED = "com.myapplication.MainActivity.SELECTED_SHIPPED";
+    public static final String SELECTED_INVENTORY = "MainActivity.SELECTED_INVENTORY";
+    public static final String SELECTED_SOLD = "MainActivity.SELECTED_SOLD";
+    public static final String SELECTED_SHIPPED = "MainActivity.SELECTED_SHIPPED";
 
     public static String selectedView = SELECTED_INVENTORY;
     private ExpandableListView listView;

@@ -1,4 +1,4 @@
-package com.myapplication.dialogs;
+package com.tallyup.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import com.myapplication.R;
+import com.tallyup.R;
 
 
 /**

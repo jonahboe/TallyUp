@@ -1,4 +1,4 @@
-package com.myapplication.dialogs;
+package com.tallyup.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -14,12 +14,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.myapplication.R;
+import com.tallyup.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 
