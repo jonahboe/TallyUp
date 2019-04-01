@@ -15,7 +15,9 @@ import android.widget.EditText;
 import com.myapplication.MainActivity;
 import com.myapplication.R;
 
-
+/**
+ * This builds the display for the options of what to do when the item is clicked.
+ */
 public class ItemOptionDialog extends AppCompatDialogFragment {
 
     public static final String TAG = "ItemOptionDialog";
@@ -27,13 +29,27 @@ public class ItemOptionDialog extends AppCompatDialogFragment {
     private String category;
     private String item;
 
+    /**
+     * Gives the option of changing the name of the category.
+     * @param category the category to be changed.
+     */
     public void setCategory(String category) {
         this.category = category;
     }
+
+    /**
+     * Gives the option of changing the name of the item.
+     * @param item the item to be changed.
+     */
     public void setItem(String item) {
         this.item = item;
     }
 
+    /**
+     * Allows a dialog window to appear when items or categories are interacted with
+     * @param savedInstanceState The last saved stuff.
+     * @return creates the dialog.
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -115,6 +131,10 @@ public class ItemOptionDialog extends AppCompatDialogFragment {
         return builder.create();
     }
 
+    /**
+     * Runs when the inflater is attached to the activity.
+     * @param context the activity to be passed in.
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -126,7 +146,9 @@ public class ItemOptionDialog extends AppCompatDialogFragment {
         }
     }
 
-    // An listener for our item adder
+    /**
+     * A listener for our item adder
+     */
     public interface ItemOptionDialogListener {
         void onRenameItem(String category, String oldName, String newName);
         void onMoveItemPressed(String category, String item);
