@@ -39,14 +39,6 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     private static Inventory inventory;
     private static Inventory sold;
     private static Inventory shipped;
-
-    private void updateListAdapter(Inventory i) {
-        listAdapter.setDataCategory(i.getCategoriesList());
-        listAdapter.setDataItem(i.getItemsMap());
-        listAdapter.setDataItemQuantity(i.getItemsQuantityMap());
-        listAdapter.notifyDataSetChanged();
-    }
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -78,6 +70,23 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         }
     };
 
+    /**
+     * Updates the list adapter to contain the information of the current inventory being viewed.
+     * @param i the inventory being set to fill the view.
+     */
+    private void updateListAdapter(Inventory i) {
+        listAdapter.setDataCategory(i.getCategoriesList());
+        listAdapter.setDataItem(i.getItemsMap());
+        listAdapter.setDataItemQuantity(i.getItemsQuantityMap());
+        listAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Run when the main activity is first created.
+     * Loads the three inventory sets from storage in shared preferences.
+     * Sets up the list view to start out with the "inventory" set loaded.
+     * @param savedInstanceState A previously saved state, if applicable.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +117,10 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         listView.setAdapter(listAdapter);
     }
 
+    /**
+     * Run when the current activity is paused.
+     * Saves the three inventory sets to the shared preferences in storage.
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -118,7 +131,11 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
     }
 
 
-    // Menu bar stuff
+    /**
+     * Inflates the menu with our custom menu bar.
+     * @param menu Takes the menu to be updated.
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Add our custom menu items
@@ -126,6 +143,11 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         return true;
     }
 
+    /**
+     * Runs when the item has been pressed.
+     * @param item Takes the menu item to be updated.
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Get the item that called this function
@@ -149,6 +171,14 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Runs when an item is being added.
+     * Adds the item to the inventory set.
+     * Updates the view if needed.
+     * @param item The item to e added.
+     * @param category The category name where the item is to be stored.
+     * @param quantity The quantity of the item to be added.
+     */
     @Override
     public void onAddedItem(String item, String category, int quantity) {
 
@@ -162,6 +192,11 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         new Toast(this).makeText(this,"Item added",Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Run when the category option button is pressed.
+     * Sets up the dialog to be displayed.
+     * @param category
+     */
     @Override
     public void onOptionButtonPressed(String category) {
         CategoryOptionDialog dialog = new CategoryOptionDialog();
@@ -169,6 +204,11 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         dialog.show(getSupportFragmentManager(),"categoryInfoDialog");
     }
 
+    /**
+     * Run when a category is deleted.
+     * Facilitates which set to delete from.
+     * @param category the category name to delete.
+     */
     @Override
     public void onDeleteCategory(String category) {
 
@@ -186,6 +226,12 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         }
     }
 
+    /**
+     * Run when renaming a category
+     * Facilitates which set to rename in.
+     * @param oldName String of the old name.
+     * @param newName String of the name to be switched to.
+     */
     @Override
     public void onRenameCategory(String oldName, String newName) {
         if(newName.matches("") || newName.charAt(0) == ' ') {
@@ -206,6 +252,12 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         }
     }
 
+    /**
+     * Run when an item was pressed.
+     * Sets up the items option dialog to be opened.
+     * @param item
+     * @param category
+     */
     @Override
     public void onItemPressed(String item, String category) {
         ItemOptionDialog dialog = new ItemOptionDialog();
@@ -214,6 +266,13 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         dialog.show(getSupportFragmentManager(),"itemInfoDialog");
     }
 
+    /**
+     * Run when renaming a item
+     * Facilitates which set to rename in.
+     * @param category Name of category where item is located.
+     * @param oldName String of the old name.
+     * @param newName String of the name to be switched to.
+     */
     @Override
     public void onRenameItem(String category, String oldName, String newName) {
         if(newName.matches("") || category.matches("") || newName.charAt(0) == ' ' || category.charAt(0) == ' ') {
@@ -235,6 +294,12 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         }
     }
 
+    /**
+     * Run when a category is deleted.
+     * Facilitates which set to delete from.
+     * @param category Name of category where item is located.
+     * @param item The item name to delete.
+     */
     @Override
     public void onDeleteItem(String category, String item) {
 
@@ -252,6 +317,12 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         }
     }
 
+    /**
+     * Run when moving item button was pressed.
+     * Sets up a dialog to get the info of the item being moved.
+     * @param category Name of category where item is located.
+     * @param item Name of the item to be moved
+     */
     @Override
     public void onMoveItemPressed(String category, String item) {
 
@@ -271,6 +342,12 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
         }
     }
 
+    /**
+     * Run when moving an item between inventory sets.
+     * @param category Name of category where item is located.
+     * @param item Name of item being moved.
+     * @param quantity Quantity of the item being moved.
+     */
     @Override
     public void onMoveItem(String category, String item, int quantity) {
 
