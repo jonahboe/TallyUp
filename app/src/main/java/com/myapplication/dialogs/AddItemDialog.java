@@ -39,21 +39,25 @@ public class AddItemDialog extends AppCompatDialogFragment {
     private List<String> categoryPromptList;
 
     /**
-     *
+     * Set the item list for the dropdown prompt.
      * @param itemPromptList
      */
     public void setItemPrompts(List<String> itemPromptList) {
         this.itemPromptList = itemPromptList;
     }
 
+    /**
+     * Set the category list for the dropdown prompt.
+     * @param categoryPromptList
+     */
     public void setCategoryPromptList(List<String> categoryPromptList) {
         this.categoryPromptList = categoryPromptList;
     }
 
     /**
-     * uses the instance to add more onto the instance according to what the user types in
-     * @param savedInstanceState
-     * @return
+     * uses the instance to add more onto the instance according to what the user types in.
+     * @param savedInstanceState The last built instance.
+     * @return the dialog.
      */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

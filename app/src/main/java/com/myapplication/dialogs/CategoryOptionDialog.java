@@ -15,7 +15,8 @@ import com.myapplication.R;
 
 
 /**
- * This has
+ * This builds the display for the options of what to do when the option button is pressed
+ * cof a category.
  */
 public class CategoryOptionDialog extends AppCompatDialogFragment {
 
