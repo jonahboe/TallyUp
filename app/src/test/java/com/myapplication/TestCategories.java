@@ -11,7 +11,7 @@ public class TestCategories {
     @Test
     public void TestGetSetItem() {
         Category category = new Category("Fruit");
-        Item item = new Item("Apple", 2,3);
+        Item item = new Item("Apple", 23);
         category.addItem(item);
         assertEquals(category.getItems().get(0), item);
     }
