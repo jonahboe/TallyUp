@@ -235,16 +235,17 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
             new Toast(this).makeText(this,"Error: Please fill out the field",Toast.LENGTH_LONG).show();
             return;
         }
+        inventory.renameCategory(oldName, newName);
+        sold.renameCategory(oldName, newName);
+        shipped.renameCategory(oldName, newName);
+
         if(selectedView.equals(SELECTED_INVENTORY)) {
-            inventory.renameCategory(oldName, newName);
             updateListAdapter(inventory);
         }
         if(selectedView.equals(SELECTED_SOLD)) {
-            sold.renameCategory(oldName, newName);
             updateListAdapter(sold);
         }
         if(selectedView.equals(SELECTED_SHIPPED)) {
-            shipped.renameCategory(oldName, newName);
             updateListAdapter(shipped);
         }
     }
@@ -277,16 +278,17 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
             return;
         }
 
+        inventory.renameItem(category, oldName, newName);
+        sold.renameItem(category, oldName, newName);
+        shipped.renameItem(category, oldName, newName);
+
         if(selectedView.equals(SELECTED_INVENTORY)) {
-            inventory.renameItem(category, oldName, newName);
             updateListAdapter(inventory);
         }
         if(selectedView.equals(SELECTED_SOLD)) {
-            sold.renameItem(category, oldName, newName);
             updateListAdapter(sold);
         }
         if(selectedView.equals(SELECTED_SHIPPED)) {
-            shipped.renameItem(category, oldName, newName);
             updateListAdapter(shipped);
         }
     }
