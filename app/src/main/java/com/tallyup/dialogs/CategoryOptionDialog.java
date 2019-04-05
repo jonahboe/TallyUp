@@ -36,9 +36,9 @@ public class CategoryOptionDialog extends AppCompatDialogFragment {
     }
 
     /**
-     * this section has the code that deletes categorys.
-     * @param savedInstanceState
-     * @return
+     * this section has the code that deletes categories.
+     * @param savedInstanceState the category that exists
+     * @return the category that exists
      */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

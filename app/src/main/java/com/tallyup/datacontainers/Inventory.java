@@ -28,7 +28,7 @@ public class Inventory {
 
     /**
      * Gets a list of the category names held within inventory.
-     * @return
+     * @return the inventory list
      */
     public List<Category> getInventory() {
         return this.inventory;
@@ -116,7 +116,7 @@ public class Inventory {
      * Return the item object specified
      * @param category the category it goes through
      * @param item the item that will be retrieved
-     * @return
+     * @return the item
      */
     public Item getItem(String category, String item) {
         for (Category c : inventory) {
@@ -133,7 +133,7 @@ public class Inventory {
     /**
      *
      * @param name
-     * @return
+     * @return the name of the category
      */
     public Category getCategory(String name) {
         for (Category c : inventory) {
