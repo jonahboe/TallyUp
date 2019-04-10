@@ -9,12 +9,14 @@
         android:id="@+id/itemText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textPersonName"
         android:hint="@string/add_dialog_item" />
 
     <AutoCompleteTextView
         android:id="@+id/categoryText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textPersonName"
         android:layout_below="@+id/itemText"
         android:layout_marginTop="16dp"
         android:hint="@string/add_dialog_category" />
