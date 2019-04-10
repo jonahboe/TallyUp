@@ -221,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
             shipped.deleteCategory(category);
             updateListAdapter(shipped);
         }
+        new Toast(this).makeText(this,"Item deleted",Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -235,18 +236,27 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
             new Toast(this).makeText(this,"Error: Please fill out the field",Toast.LENGTH_LONG).show();
             return;
         }
-        inventory.renameCategory(oldName, newName);
-        sold.renameCategory(oldName, newName);
-        shipped.renameCategory(oldName, newName);
+        else {
+            new Toast(this).makeText(this,"Category renamed",Toast.LENGTH_SHORT).show();
+        }
 
         if(selectedView.equals(SELECTED_INVENTORY)) {
+            inventory.renameCategory(oldName, newName);
             updateListAdapter(inventory);
+            shipped.renameCategory(oldName, newName);
+            sold.renameCategory(oldName, newName);
         }
         if(selectedView.equals(SELECTED_SOLD)) {
+            shipped.renameCategory(oldName, newName);
             updateListAdapter(sold);
+            inventory.renameCategory(oldName, newName);
+            sold.renameCategory(oldName, newName);
         }
         if(selectedView.equals(SELECTED_SHIPPED)) {
+            sold.renameCategory(oldName, newName);
             updateListAdapter(shipped);
+            inventory.renameCategory(oldName, newName);
+            shipped.renameCategory(oldName, newName);
         }
     }
 
@@ -277,19 +287,28 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
             new Toast(this).makeText(this,"Error: Please fill out the field",Toast.LENGTH_LONG).show();
             return;
         }
+        else {
+            new Toast(this).makeText(this,"Item renamed",Toast.LENGTH_SHORT).show();
+        }
 
-        inventory.renameItem(category, oldName, newName);
-        sold.renameItem(category, oldName, newName);
-        shipped.renameItem(category, oldName, newName);
 
         if(selectedView.equals(SELECTED_INVENTORY)) {
+            inventory.renameItem(category, oldName, newName);
             updateListAdapter(inventory);
+            sold.renameItem(category, oldName, newName);
+            shipped.renameItem(category, oldName, newName);
         }
         if(selectedView.equals(SELECTED_SOLD)) {
+            sold.renameItem(category, oldName, newName);
             updateListAdapter(sold);
+            inventory.renameItem(category, oldName, newName);
+            shipped.renameItem(category, oldName, newName);
         }
         if(selectedView.equals(SELECTED_SHIPPED)) {
+            shipped.renameItem(category, oldName, newName);
             updateListAdapter(shipped);
+            inventory.renameItem(category, oldName, newName);
+            sold.renameItem(category, oldName, newName);
         }
     }
 
@@ -314,6 +333,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
             shipped.deleteItem(category, item);
             updateListAdapter(shipped);
         }
+        new Toast(this).makeText(this,"Item deleted",Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -356,6 +376,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
             i.setQuantity(i.getQuantity() - quantity);
             sold.sortItems();
             updateListAdapter(inventory);
+            new Toast(this).makeText(this,"Item moved to sold",Toast.LENGTH_SHORT).show();
         }
         if(selectedView.equals(SELECTED_SOLD)) {
             Item i = sold.getItem(category, item);
@@ -365,6 +386,7 @@ public class MainActivity extends AppCompatActivity implements AddItemDialog.Add
                 sold.deleteItem(category, item);
             shipped.sortItems();
             updateListAdapter(sold);
+            new Toast(this).makeText(this,"Item moved to shipped",Toast.LENGTH_SHORT).show();
         }
     }
 }
